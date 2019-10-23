@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {Injector} from '@angular/core';
@@ -10,11 +10,16 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationMessagesComponent } from './shared/messages/registration-messages/registration-messages.component';
 import { RegistrationValidatorService } from './shared/validators/registration/registration-validator.service';
+import { LoginComponent } from './components/login/login.component';
+import { LoginMessagesComponent } from './shared/messages/login-messages/login-messages.component';
+import { SecureComponent } from './components/secure/secure.component';
 
 export let InjectorInstance: Injector;
 
 const appRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'secure', component: SecureComponent },
   { path: '', component: HomeComponent }
 ];
 
@@ -25,6 +30,9 @@ const appRoutes: Routes = [
     RegistrationComponent,
     RegistrationMessagesComponent,
     HomeComponent,
+    LoginComponent,
+    LoginMessagesComponent,
+    SecureComponent,
   ],
   imports: [
     BrowserModule,

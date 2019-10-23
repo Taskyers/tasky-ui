@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 
 
 @Component({
-  selector: 'control-messages',
+  selector: 'registration-message',
   template: `<div *ngIf="this.errorMessage !== null">{{errorMessage}}</div>`
 })
 export class RegistrationMessagesComponent implements OnInit {
