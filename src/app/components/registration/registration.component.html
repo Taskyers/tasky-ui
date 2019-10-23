@@ -1,47 +1,62 @@
 <HTML>
-    <head>
-    </head>
-
-    <body>
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="text-center border border-light p-5">
-
-            <p class="h4 mb-4">Sign up</p>
-
-            <div class="form-row mb-4">
-                <div class="col">
-                    <input type="text" formControlName="username" id="defaultRegisterFormFirstName" class="form-control" placeholder="Username" autocomplete="off">
-                </div>
-                <div *ngIf="userForm.controls['username'].invalid && (userForm.controls['username'].dirty || userForm.controls['username'].touched)" class="alert alert-danger">
-                    <registration-message [control]="userForm.get('username')"></registration-message>
-                </div>
-                <div class="col">
-                    <input type="text" formControlName="email" id="defaultRegisterFormEmail" class="form-control" placeholder="Email" autocomplete="off">
-                </div>
-                <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)" class="alert alert-danger">
-                  <registration-message [control]="userForm.get('email')"></registration-message>
-                </div>
-                <div class="col">
-                    <input type="password" formControlName="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" autocomplete="off">
-                </div>
-                <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)" class="alert alert-danger">
-                  <registration-message [control]="userForm.get('password')"></registration-message>
-                </div>
-                <div class="col">
-                    <input type="text" formControlName="name" id="defaultRegisterFormName" class="form-control" placeholder="First name" autocomplete="off">
-                </div>
-                <div *ngIf="userForm.controls['name'].invalid && (userForm.controls['name'].dirty || userForm.controls['name'].touched)" class="alert alert-danger">
-                  <registration-message [control]="userForm.get('name')"></registration-message>
-                </div>
-                <div class="col">
-                    <input type="text" formControlName="surname" id="defaultRegisterFormSurname" class="form-control" placeholder="Surname" autocomplete="off">
-                </div>
-                <div *ngIf="userForm.controls['surname'].invalid && (userForm.controls['surname'].dirty || userForm.controls['surname'].touched)" class="alert alert-danger">
-                  <registration-message [control]="userForm.get('surname')"></registration-message>
-                </div>
-            </div>
-
-            <button class="btn btn-info my-4 btn-block" type="submit" [disabled]="!userForm.valid">Sign in</button>
-          </form>
-        <router-outlet></router-outlet>
-    </body>
+<body>
+<div class = "registration-form">
+	<h3>Sign up</h3>
+	<form [formGroup] = "userForm" (ngSubmit) = "onSubmit()">
+		<div class = "form-group">
+			<label for = "defaultRegisterFormName">
+				<input type = "text" formControlName = "username" id = "defaultRegisterFormName"
+				       class = "form-control"
+				       placeholder = "Username" autocomplete = "off" />
+			</label>
+			<div *ngIf = "userForm.controls['username'].invalid && (userForm.controls['username'].dirty ||
+			userForm.controls['username'].touched)" class = "alert alert-danger">
+				<registration-message [control] = "userForm.get('username')"></registration-message>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label for = "defaultRegisterFormEmail">
+				<input type = "text" formControlName = "email" id = "defaultRegisterFormEmail" class = "form-control"
+				       placeholder = "Email" autocomplete = "off" />
+			</label>
+			<div *ngIf = "userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)"
+			     class = "alert alert-danger">
+				<registration-message [control] = "userForm.get('email')"></registration-message>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label for = "defaultRegisterFormPassword">
+				<input type = "password" formControlName = "password" id = "defaultRegisterFormPassword"
+				       class = "form-control" placeholder = "Password" autocomplete = "off" />
+			</label>
+			<div *ngIf = "userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)"
+			     class = "alert alert-danger">
+				<registration-message [control] = "userForm.get('password')"></registration-message>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label for = "defaultRegisterFormFirstName">
+				<input type = "text" formControlName = "name" id = "defaultRegisterFormFirstName" class = "form-control"
+				       placeholder = "First name" autocomplete = "off" />
+			</label>
+			<div *ngIf = "userForm.controls['name'].invalid && (userForm.controls['name'].dirty || userForm.controls['name'].touched)"
+			     class = "alert alert-danger">
+				<registration-message [control] = "userForm.get('name')"></registration-message>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label for = "defaultRegisterFormSurname">
+				<input type = "text" formControlName = "surname" id = "defaultRegisterFormSurname"
+				       class = "form-control" placeholder = "Surname" autocomplete = "off" />
+			</label>
+			<div *ngIf = "userForm.controls['surname'].invalid && (userForm.controls['surname'].dirty || userForm.controls['surname'].touched)"
+			     class = "alert alert-danger">
+				<registration-message [control] = "userForm.get('surname')"></registration-message>
+			</div>
+		</div>
+		<button class = "btn btn-info my-4 btn-block" type = "submit" [disabled] = "!userForm.valid">Sign up</button>
+	</form>
+</div>
+<router-outlet></router-outlet>
+</body>
 </HTML>
