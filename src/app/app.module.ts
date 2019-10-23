@@ -1,16 +1,46 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import {Injector} from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { HomeComponent } from './components/home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegistrationMessagesComponent } from './shared/messages/registration-messages/registration-messages.component';
+import { RegistrationValidatorService } from './shared/validators/registration/registration-validator.service';
+
+export let InjectorInstance: Injector;
+
+const appRoutes: Routes = [
+  { path: 'register', component: RegistrationComponent },
+  { path: '', component: HomeComponent }
+];
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrationComponent,
+    RegistrationMessagesComponent,
+    HomeComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    RegistrationValidatorService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector)
+  {
+    InjectorInstance = this.injector;
+  }
+}
