@@ -2,11 +2,12 @@
     text-align : center;
     padding    : 9%;
     background : #282726;
-    box-shadow : 10px 5px 8px 10px rgba(0, 0, 0, 0.2), 5px 9px 26px 5px rgba(0, 0, 0, 0.19);
+    box-shadow : 10px 5px 8px 5px rgba(0, 0, 0, 0.2), 5px 9px 26px 5px rgba(0, 0, 0, 0.19);
 }
 
 .registration-form h3 {
     text-align    : center;
     margin-bottom : 12%;
     color         : #fff;
+    font-family   : "Lucida Console", Monaco, monospace;
 }
