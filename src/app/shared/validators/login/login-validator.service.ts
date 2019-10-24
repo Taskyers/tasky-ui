@@ -3,7 +3,7 @@ export class LoginValidatorService {
 
     static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
         const config = {
-            required: 'required',
+            required: 'Field is required',
         };
         return config[ validatorName ];
     }

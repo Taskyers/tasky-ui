@@ -1,32 +1,33 @@
 <HTML>
-  <head>
-  </head>
-
-  <body>
-    <form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()" class = "text-center border border-light p-5">
-
-        <p class = "h4 mb-4">Sign up</p>
-
-        <div class = "form-row mb-4">
-            <div class = "col">
-                <input type = "text" formControlName = "username" id = "defaultRegisterFormFirstName" class = "form-control"
-                       placeholder = "Username" autocomplete = "off">
-            </div>
-            <div *ngIf = "loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)"
-                 class = "alert alert-danger">
-                <login-message [control] = "loginForm.get('username')"></login-message>
-            </div>
-            <div class = "col">
-                <input type = "password" formControlName = "password" id = "defaultRegisterFormPassword"
-                       class = "form-control" placeholder = "Password" autocomplete = "off">
-            </div>
-            <div *ngIf = "loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
-                 class = "alert alert-danger">
-                <login-message [control] = "loginForm.get('password')"></login-message>
-            </div>
-        </div>
-        <button class = "btn btn-info my-4 btn-block" type = "submit" [disabled] = "!loginForm.valid">Sign in</button>
-    </form>
-    <router-outlet></router-outlet>
-  </body>
+<body>
+<div class = "login-form bg-dark">
+	<h3>Sign in</h3>
+	<form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()">
+		<div class = "form-group">
+			<label for = "defaultRegisterFormFirstName">
+				<input type = "text" formControlName = "username" id = "defaultRegisterFormFirstName"
+				       class = "form-control"
+				       placeholder = "Username" autocomplete = "off" />
+			</label>
+			<div *ngIf = "loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)"
+			     class = "alert alert-danger">
+				<login-message [control] = "loginForm.get('username')"></login-message>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label for = "defaultRegisterFormPassword">
+				<input type = "password" formControlName = "password" id = "defaultRegisterFormPassword"
+				       class = "form-control" placeholder = "Password" autocomplete = "off">
+			</label>
+			<div *ngIf = "loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+			     class = "alert alert-danger">
+				<login-message [control] = "loginForm.get('password')"></login-message>
+			</div>
+		</div>
+		<button class = "btn btn-info my-4 btn-block form-group" type = "submit" [disabled] = "!loginForm.valid">Sign in</button>
+	</form>
+	<a href = "#" class = "btn-forgot-password">Forget password?</a>
+</div>
+<router-outlet></router-outlet>
+</body>
 </HTML>

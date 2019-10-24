@@ -5,7 +5,7 @@ export class RegistrationValidatorService {
   static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
     const config = {
       invalidUsername: 'Username already taken',
-      required: 'required',
+      required: 'Field is required',
       invalidEmail: 'Invalid email',
       invalidPassword: 'Password is not strong enough',
       invalidName: 'Invalid name',
