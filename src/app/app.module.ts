@@ -14,11 +14,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginMessagesComponent } from './shared/messages/login-messages/login-messages.component';
 import { SecureComponent } from './components/secure/secure.component';
-<<<<<<< HEAD
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
-=======
 import { AccountActivationComponent } from './components/account-activation/account-activation.component';
->>>>>>> account_activation
 
 export let InjectorInstance: Injector;
 
@@ -31,7 +28,6 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-<<<<<<< HEAD
     declarations: [
         AppComponent,
         RegistrationComponent,
