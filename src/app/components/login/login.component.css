@@ -23,6 +23,21 @@
     animation         : glow 1s ease-in-out infinite alternate;
 }
 
+.form-group {
+    height : auto;
+    margin : auto;
+    width  : 55%;
+}
+
+.form-group input {
+    width : 100%;
+}
+
+.login-form form {
+    width: 75%;
+    margin: auto;
+}
+
 @-webkit-keyframes glow {
     from {
         text-shadow : 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff, 0 0 10px #fff, 0 0 12px #fff, 0 0 13px #fff;
