@@ -11,3 +11,17 @@
     color         : #fff;
     font-family   : "Lucida Console", Monaco, monospace;
 }
+.form-group {
+    height : auto;
+    margin : auto;
+    width  : 55%;
+}
+
+.form-group input {
+    width : 100%;
+}
+
+.registration-form form {
+    width: 75%;
+    margin: auto;
+}
