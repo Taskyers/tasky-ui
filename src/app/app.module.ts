@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginMessagesComponent } from './shared/messages/login-messages/login-messages.component';
 import { SecureComponent } from './components/secure/secure.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
+import { AccountActivationComponent } from './components/account-activation/account-activation.component';
 
 export let InjectorInstance: Injector;
 
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'secure', component: SecureComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  {path : 'activateAccount/:key', component: AccountActivationComponent}
 ];
 
 @NgModule({
@@ -36,6 +38,7 @@ const appRoutes: Routes = [
         LoginMessagesComponent,
         SecureComponent,
         HeaderHomeComponent,
+        AccountActivationComponent,
     ],
     imports: [
         BrowserModule,
