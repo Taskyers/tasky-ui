@@ -5,6 +5,7 @@ import { RegistrationValidatorService } from '../../shared/validators/registrati
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Swal } from '../../shared/utilities/swal';
 
 @Component({
     selector: 'app-registration',
@@ -37,25 +38,14 @@ export class RegistrationComponent implements OnInit {
                 .subscribe(
                     (result) => {
                         isSuccess = true;
-                        swal.update({
-                            type: 'success',
-                            title: 'Success!',
-                            text: result.message
-                        });
+                        Swal.swalSuccessMessageWithRouting(result.message, this.router);
                     },
                     error => {
-                        swal.update({
-                            type: 'error',
-                            title: 'Something went wrong',
-                        });
+                        Swal.swalRegistrationFail();
                     }
                 );
             swal.fire({
                 showConfirmButton: true
-            }).then(() => {
-                if ( isSuccess ) {
-                    this.router.navigate([ '' ]);
-                }
             });
         }
     }

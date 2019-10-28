@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
+import { Swal } from '../../shared/utilities/swal';
 
 @Component({
     selector: 'app-login',
@@ -37,12 +37,11 @@ export class LoginComponent implements OnInit {
                     },
                     error => {
                         if ( !isSuccess ) {
-                            swal.fire({
-                                type: 'error',
-                                title: 'Invalid username and/or password!',
-                                showConfirmButton: true,
-                                timer: 2500
-                            });
+                            if ( error.status === 401 ) {
+                                Swal.swalLoginInvalidData();
+                            } else {
+                                Swal.swalLoginDefault();
+                            }
                         }
                     }
                 );
