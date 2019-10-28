@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         let isSuccess = false;
         if ( this.loginForm.valid ) {
-            this.http.post('https://localhost:8443/login', this.loginForm.value)
+            this.http.post(environment.baseUrl + '/login', this.loginForm.value)
                 .subscribe(
                     (result) => {
                         isSuccess = true;
