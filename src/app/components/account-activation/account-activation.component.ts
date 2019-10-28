@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
+import { Swal } from '../../shared/utilities/swal';
 
 @Component({
     selector: 'app-account-activation',
@@ -27,25 +28,12 @@ export class AccountActivationComponent implements OnInit {
         this.http.get<any>(environment.baseUrl + '/activateAccount/' + this.key)
             .subscribe(
                 (result) => {
-                    swal.update({
-                        type: 'success',
-                        title: 'Success!',
-                        text: result.message
-                    });
+                    Swal.swalSuccessMessageWithRouting(result.message, this.router);
                 },
                 error => {
-                    swal.update({
-                        type: 'error',
-                        title: 'Something went wrong',
-                        text: error.error.message
-                    });
+                    Swal.swalErrorMessageWithRouting(error.error.message, this.router);
                 }
             );
-        swal.fire({
-            showConfirmButton: true
-        }).then(() => {
-            this.router.navigate([ '' ]);
-        });
     }
 
 }
