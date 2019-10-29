@@ -16,6 +16,9 @@ import { LoginMessagesComponent } from './shared/messages/login-messages/login-m
 import { SecureComponent } from './components/secure/secure.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
 import { AccountActivationComponent } from './components/account-activation/account-activation.component';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { PasswordRecoveryMessagesComponent } from './shared/messages/password-recovery-messages/password-recovery-messages.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 export let InjectorInstance: Injector;
 
@@ -24,7 +27,9 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'secure', component: SecureComponent },
   { path: '', component: HomeComponent },
-  {path : 'activateAccount/:key', component: AccountActivationComponent}
+  { path: 'activateAccount/:key', component: AccountActivationComponent},
+  { path: 'recovery', component: PasswordRecoveryComponent},
+  { path: 'passwordRecovery/:token', component: UpdatePasswordComponent}
 ];
 
 @NgModule({
@@ -39,6 +44,9 @@ const appRoutes: Routes = [
         SecureComponent,
         HeaderHomeComponent,
         AccountActivationComponent,
+        PasswordRecoveryComponent,
+        PasswordRecoveryMessagesComponent,
+        UpdatePasswordComponent
     ],
     imports: [
         BrowserModule,
