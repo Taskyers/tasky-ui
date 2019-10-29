@@ -14,8 +14,6 @@ export class AccountActivationComponent implements OnInit {
 
     key: string;
 
-    data: any;
-
     constructor(
         private route: ActivatedRoute,
         private http: HttpClient,
