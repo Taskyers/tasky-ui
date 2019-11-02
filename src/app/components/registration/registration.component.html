@@ -10,19 +10,32 @@
 				       placeholder = "Username" autocomplete = "off" />
 			</label>
 			<div *ngIf = "userForm.controls['username'].invalid && (userForm.controls['username'].dirty ||
-			userForm.controls['username'].touched)" class = "alert alert-danger">
+			userForm.controls['username'].touched) && !userForm.get('username').errors.usernameInUse" class = "alert alert-danger">
 				<registration-message [control] = "userForm.get('username')"></registration-message>
 			</div>
+      <div *ngIf="userForm.get('username').status === 'VALID'" class = "alert alert-success">
+        Username is available!
+      </div>
+      <div *ngIf="userForm.get('username').errors && userForm.get('username').errors.usernameInUse" class = "alert alert-danger">
+        Username is already taken.
+      </div>
 		</div>
 		<div class = "form-group">
 			<label for = "defaultRegisterFormEmail">
 				<input type = "text" formControlName = "email" id = "defaultRegisterFormEmail" class = "form-control"
 				       placeholder = "Email" autocomplete = "off" />
 			</label>
-			<div *ngIf = "userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)"
+			<div *ngIf = "userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)
+            && !userForm.get('email').errors.emailInUse"
 			     class = "alert alert-danger">
 				<registration-message [control] = "userForm.get('email')"></registration-message>
 			</div>
+      <div *ngIf="userForm.get('email').status === 'VALID'" class = "alert alert-success">
+        Email is available!
+      </div>
+      <div *ngIf="userForm.get('email').errors && userForm.get('email').errors.emailInUse" class = "alert alert-danger">
+        Email is already taken.
+      </div>
 		</div>
 		<div class = "form-group">
 			<label for = "defaultRegisterFormPassword">
