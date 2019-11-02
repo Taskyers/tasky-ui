@@ -19,6 +19,7 @@ import { AccountActivationComponent } from './components/account-activation/acco
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordRecoveryMessagesComponent } from './shared/messages/password-recovery-messages/password-recovery-messages.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import {AuthService} from './services/auth.service';
 
 export let InjectorInstance: Injector;
 
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
         ReactiveFormsModule,
     ],
     providers: [
-        RegistrationValidatorService
+        RegistrationValidatorService,
+        AuthService
     ],
     bootstrap: [AppComponent]
 })
