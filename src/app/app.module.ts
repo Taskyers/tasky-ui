@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Injector } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -13,24 +13,27 @@ import { RegistrationValidatorService } from './shared/validators/registration/r
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginMessagesComponent } from './shared/messages/login-messages/login-messages.component';
-import { SecureComponent } from './components/secure/secure.component';
+import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
 import { AccountActivationComponent } from './components/account-activation/account-activation.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { PasswordRecoveryMessagesComponent } from './shared/messages/password-recovery-messages/password-recovery-messages.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
-import {AuthService} from './services/auth.service';
+import { AuthService } from './services/auth.service';
+import { HeaderMainComponent } from './components/header-main/header-main.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpRequestInterceptor } from './shared/utilities/HttpRequestInterceptor';
 
 export let InjectorInstance: Injector;
 
 const appRoutes: Routes = [
-  { path: 'register', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'secure', component: SecureComponent },
-  { path: '', component: HomeComponent },
-  { path: 'activateAccount/:key', component: AccountActivationComponent},
-  { path: 'recovery', component: PasswordRecoveryComponent},
-  { path: 'passwordRecovery/:token', component: UpdatePasswordComponent}
+    { path: 'register', component: RegistrationComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'mainDashboard', component: MainDashboardComponent },
+    { path: '', component: HomeComponent },
+    { path: 'activateAccount/:key', component: AccountActivationComponent },
+    { path: 'recovery', component: PasswordRecoveryComponent },
+    { path: 'passwordRecovery/:token', component: UpdatePasswordComponent }
 ];
 
 @NgModule({
@@ -42,12 +45,13 @@ const appRoutes: Routes = [
         FooterComponent,
         LoginComponent,
         LoginMessagesComponent,
-        SecureComponent,
+        MainDashboardComponent,
         HeaderHomeComponent,
         AccountActivationComponent,
         PasswordRecoveryComponent,
         PasswordRecoveryMessagesComponent,
-        UpdatePasswordComponent
+        UpdatePasswordComponent,
+        HeaderMainComponent,
     ],
     imports: [
         BrowserModule,
@@ -55,12 +59,14 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         FormsModule,
         ReactiveFormsModule,
+        NgbModule
     ],
     providers: [
         RegistrationValidatorService,
-        AuthService
+        AuthService,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [ AppComponent ]
 })
 export class AppModule {
     constructor(private injector: Injector) {
