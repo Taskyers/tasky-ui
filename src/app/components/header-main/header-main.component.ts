@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderMainComponent implements OnInit {
 
+    loupeIconPath = '../../assets/icons/loupe.png';
     constructor() { }
 
     ngOnInit() {
