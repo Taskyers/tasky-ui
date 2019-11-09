@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header-main',
@@ -8,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderMainComponent implements OnInit {
 
     loupeIconPath = '../../assets/icons/loupe.png';
-    constructor() { }
+
+    constructor(
+        private http: HttpClient,
+        private router: Router
+    ) { }
 
     ngOnInit() {
+    }
+
+    logout() {
+        this.http.post(environment.baseUrl + '/logout', '').subscribe((response) => response);
+        this.router.navigate([ '' ]);
     }
 
 }
