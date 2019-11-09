@@ -23,6 +23,8 @@ import { AuthService } from './services/auth.service';
 import { HeaderMainComponent } from './components/header-main/header-main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpRequestInterceptor } from './shared/utilities/HttpRequestInterceptor';
+import { ErrorHandler } from './errorHandler';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export let InjectorInstance: Injector;
 
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'activateAccount/:key', component: AccountActivationComponent },
     { path: 'recovery', component: PasswordRecoveryComponent },
-    { path: 'passwordRecovery/:token', component: UpdatePasswordComponent }
+    { path: 'passwordRecovery/:token', component: UpdatePasswordComponent },
+    { path: 'pageNotFound', component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -52,6 +55,7 @@ const appRoutes: Routes = [
         PasswordRecoveryMessagesComponent,
         UpdatePasswordComponent,
         HeaderMainComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         BrowserModule,
@@ -64,7 +68,8 @@ const appRoutes: Routes = [
     providers: [
         RegistrationValidatorService,
         AuthService,
-        { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+        ErrorHandler
     ],
     bootstrap: [ AppComponent ]
 })
