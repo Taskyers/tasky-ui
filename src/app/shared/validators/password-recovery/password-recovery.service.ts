@@ -4,6 +4,7 @@ export class PasswordRecoveryService {
 
   static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
     const config = {
+      required: 'Field is required',
       invalidEmail: 'Invalid email',
       invalidPassword: 'Password is not strong enough'
     };
