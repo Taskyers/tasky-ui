@@ -26,7 +26,7 @@ export class AccountActivationComponent implements OnInit {
         this.http.get<any>(environment.baseUrl + '/activateAccount/' + this.key)
             .subscribe(
                 (result) => {
-                    Swal.swalSuccessMessageWithRouting(result.message, this.router);
+                    Swal.swalSuccessMessageWithRouting(result.message, this.router, '');
                 },
                 error => {
                     Swal.swalErrorMessageWithRouting(error.error.message, this.router);

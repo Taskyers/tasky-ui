@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
                 .subscribe(
                     (result) => {
                         isSuccess = true;
-                        Swal.swalSuccessMessageWithRouting(result.message, this.router);
+                        Swal.swalSuccessMessageWithRouting(result.message, this.router, '');
                     },
                     error => {
                         Swal.swalRegistrationFail();

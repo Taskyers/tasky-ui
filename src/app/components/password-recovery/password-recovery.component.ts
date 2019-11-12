@@ -32,7 +32,7 @@ export class PasswordRecoveryComponent implements OnInit {
       this.http.post<any>(environment.baseUrl + '/passwordRecovery/requestToken', body)
         .subscribe(
           (result) => {
-            Swal.swalSuccessMessageWithRouting(result.message, this.router);
+            Swal.swalSuccessMessageWithRouting(result.message, this.router, '');
           },
           error => {
             Swal.swalErrorMessageWithRouting(error.error.message, this.router);

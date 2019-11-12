@@ -12,7 +12,8 @@
 				<a class = "btn btn-info button-nav-link" [routerLink] = "">View all projects</a>
 			</li>&nbsp;
 			<li class = "nav-item">
-				<a class = "btn btn-info button-nav-link" [routerLink] = "">+ Create new project</a>
+				<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new
+				                                                                                      project</a>
 			</li>&nbsp;
 		</ul>
 	</div>
@@ -40,8 +41,45 @@
 				<a class = "btn btn-warning button-nav-link" [routerLink] = "">Settings</a>
 			</li>&nbsp;
 			<li class = "nav-item">
-				<a class = "btn btn-danger button-nav-link" [routerLink] = "" (click)="logout()">Logout</a>
+				<a class = "btn btn-danger button-nav-link" [routerLink] = "" (click) = "logout()">Logout</a>
 			</li>
 		</ul>
 	</div>
 </nav>
+
+<ng-template #content let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "modal-basic-title">Create new project</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "newProjectForm" (ngSubmit)="onSubmit()">
+		<div class = "modal-body">
+
+			<div class = "form-group">
+				<label for = "defaultNewProjectFormName">
+					<input type = "text" formControlName = "name" id = "defaultNewProjectFormName"
+					       class = "form-control"
+					       placeholder = "Name" autocomplete = "off" />
+				</label>
+				<div *ngIf = "newProjectForm.controls['name'].invalid && newProjectForm.controls['name'].touched"
+				     class = "alert alert-danger">
+					<new-project-message [control] = "newProjectForm.get('name')"></new-project-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "defaultNewProjectFormDescription">
+						<textarea type = "text" formControlName = "description" id = "defaultNewProjectFormDescription"
+						          class = "form-control"
+						          placeholder = "Description" autocomplete = "off"></textarea>
+				</label>
+			</div>
+
+		</div>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark">Create!</button>
+		</div>
+	</form>
+</ng-template>
