@@ -35,7 +35,7 @@ export class UpdatePasswordComponent implements OnInit {
       this.http.patch<any>(environment.baseUrl + '/passwordRecovery/' + this.token, body)
         .subscribe(
           (result) => {
-            Swal.swalSuccessMessageWithRouting(result.message, this.router);
+            Swal.swalSuccessMessageWithRouting(result.message, this.router, '');
           },
           error => {
             Swal.swalErrorMessageWithRouting(error.error.message, this.router);

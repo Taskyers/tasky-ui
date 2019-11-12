@@ -2,3 +2,16 @@
     text-decoration : none;
     color           : white;
 }
+
+.form-group {
+    width  : 42%;
+}
+
+.form-group input {
+    width : 100%;
+}
+
+.newProjectForm form {
+    width: 75%;
+    margin: auto;
+}

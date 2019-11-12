@@ -19,15 +19,25 @@ export class Swal {
         });
     }
 
-    static swalSuccessMessageWithRouting(message, router) {
+    static swalSuccessMessageWithRouting(message, router, page) {
         swal.fire({
             type: 'success',
             title: 'Success!',
             text: message,
-            timer: 5000,
+            timer: 2500,
             showConfirmButton: false,
         }).then(() => {
-            router.navigate([ '' ]);
+            router.navigate([ page ]);
+        });
+    }
+
+    static swalSuccessMessage(message) {
+        swal.fire({
+            type: 'success',
+            title: 'Success!',
+            text: message,
+            timer: 2000,
+            showConfirmButton: false,
         });
     }
 
@@ -35,6 +45,14 @@ export class Swal {
         swal.fire({
             type: 'error',
             title: 'Something went wrong!',
+            showConfirmButton: true
+        });
+    }
+
+    static swalRegistrationFailWithMessage(message) {
+        swal.fire({
+            type: 'error',
+            title: message,
             showConfirmButton: true
         });
     }

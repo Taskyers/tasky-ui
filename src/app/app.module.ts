@@ -21,10 +21,11 @@ import { PasswordRecoveryMessagesComponent } from './shared/messages/password-re
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { AuthService } from './services/auth.service';
 import { HeaderMainComponent } from './components/header-main/header-main.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpRequestInterceptor } from './shared/utilities/HttpRequestInterceptor';
 import { ErrorHandler } from './errorHandler';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { NewProjectMessagesComponent } from './shared/messages/new-project-messages/new-project-messages.component';
 
 export let InjectorInstance: Injector;
 
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
         UpdatePasswordComponent,
         HeaderMainComponent,
         PageNotFoundComponent,
+        NewProjectMessagesComponent,
     ],
     imports: [
         BrowserModule,
@@ -63,13 +65,15 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         FormsModule,
         ReactiveFormsModule,
-        NgbModule
+        NgbModule,
     ],
     providers: [
         RegistrationValidatorService,
         AuthService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
-        ErrorHandler
+        ErrorHandler,
+        NgbActiveModal,
+        NgbModal
     ],
     bootstrap: [ AppComponent ]
 })
