@@ -26,6 +26,7 @@ import { HttpRequestInterceptor } from './shared/utilities/HttpRequestIntercepto
 import { ErrorHandler } from './errorHandler';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NewProjectMessagesComponent } from './shared/messages/new-project-messages/new-project-messages.component';
+import { ViewAllProjectsComponent } from './components/view-all-projects/view-all-projects.component';
 
 export let InjectorInstance: Injector;
 
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
     { path: 'recovery', component: PasswordRecoveryComponent },
     { path: 'passwordRecovery/:token', component: UpdatePasswordComponent },
     { path: 'pageNotFound', component: PageNotFoundComponent },
+    { path: 'viewAllProjects', component: ViewAllProjectsComponent },
 ];
 
 @NgModule({
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
         HeaderMainComponent,
         PageNotFoundComponent,
         NewProjectMessagesComponent,
+        ViewAllProjectsComponent,
     ],
     imports: [
         BrowserModule,

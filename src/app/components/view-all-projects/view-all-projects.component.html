@@ -1,0 +1,84 @@
+<html>
+<app-header-main></app-header-main>
+<body>
+<div class = "jumbotron min-vh-100 bg-light m-0 d-flex flex-column">
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-12 align-self-center">
+				<ng-template [ngIf] = "length > 0" [ngIfElse] = "elseBlock">
+					<h2>All projects</h2>
+					<table class = "table table-striped table-break-word">
+						<thead>
+						<tr>
+							<th scope = "col">Name</th>
+							<th scope = "col">Description</th>
+							<th scope = "col">Owner</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor = "let project of projects | slice:startPagination:paginationLimit">
+							<td>
+								<a class = "text-info" [routerLink] = "">{{project.name}}</a>
+							</td>
+							<td>{{project.description}}</td>
+							<td>{{project.owner}}</td>
+						</tr>
+						</tbody>
+					</table>
+					<button [disabled]="paginationLimit >= projects.length" (click) = "showMoreItems()"
+					        class = "btn btn-secondary mr-2">Show more
+					</button>
+					<button [disabled]="paginationLimit <= 5" (click) = "showLessItems()"
+					        class = "btn btn-secondary ml-2">Show less
+					</button>
+				</ng-template>
+				<ng-template #elseBlock>
+					<div class = "text-center font-weight-bolder">
+						You are currently not assigned to any project. Why don't create one? <br>
+						<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new project</a>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<ng-template #content let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "modal-basic-title">Create new project</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "newProjectForm" (ngSubmit)="onSubmit()">
+		<div class = "modal-body">
+
+			<div class = "form-group">
+				<label for = "defaultNewProjectFormName">
+					<input type = "text" formControlName = "name" id = "defaultNewProjectFormName"
+					       class = "form-control"
+					       placeholder = "Name" autocomplete = "off" />
+				</label>
+				<div *ngIf = "newProjectForm.controls['name'].invalid && newProjectForm.controls['name'].touched"
+				     class = "alert alert-danger">
+					<new-project-message [control] = "newProjectForm.get('name')"></new-project-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "defaultNewProjectFormDescription">
+						<textarea type = "text" formControlName = "description" id = "defaultNewProjectFormDescription"
+						          class = "form-control"
+						          placeholder = "Description" autocomplete = "off"></textarea>
+				</label>
+			</div>
+
+		</div>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!newProjectForm.valid">Create!</button>
+		</div>
+	</form>
+</ng-template>
+</html>
+
+
