@@ -1,4 +1,5 @@
 import swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 export class Swal {
     static swalLoginInvalidData() {
@@ -38,6 +39,17 @@ export class Swal {
             text: message,
             timer: 2000,
             showConfirmButton: false,
+        });
+    }
+
+    static swalSuccessMessageWithReload(message, location) {
+        swal.fire({
+            type: 'success',
+            title: 'Success!',
+            text: message,
+            showConfirmButton: true,
+        }).then(() => {
+            location.reload();
         });
     }
 

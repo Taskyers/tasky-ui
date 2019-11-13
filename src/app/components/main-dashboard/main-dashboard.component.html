@@ -35,7 +35,7 @@
 				<ng-template #elseBlock>
 					<div class = "text-center font-weight-bolder">
 						You are currently not assigned to any project. Why don't create one? <br>
-						<a class = "btn btn-info button-nav-link" [routerLink] = "">+ Create new project</a>
+						<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new project</a>
 					</div>
 				</ng-template>
 			</div>
@@ -43,4 +43,44 @@
 	</div>
 </div>
 </body>
+
+<ng-template #content let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "modal-basic-title">Create new project</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "newProjectForm" (ngSubmit)="onSubmit()">
+		<div class = "modal-body">
+
+			<div class = "form-group">
+				<label for = "defaultNewProjectFormName">
+					<input type = "text" formControlName = "name" id = "defaultNewProjectFormName"
+					       class = "form-control"
+					       placeholder = "Name" autocomplete = "off" />
+				</label>
+				<div *ngIf = "newProjectForm.controls['name'].invalid && newProjectForm.controls['name'].touched"
+				     class = "alert alert-danger">
+					<new-project-message [control] = "newProjectForm.get('name')"></new-project-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "defaultNewProjectFormDescription">
+						<textarea type = "text" formControlName = "description" id = "defaultNewProjectFormDescription"
+						          class = "form-control"
+						          placeholder = "Description" autocomplete = "off"></textarea>
+				</label>
+			</div>
+
+		</div>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!newProjectForm.valid">Create!</button>
+		</div>
+	</form>
+</ng-template>
+
 </html>
+
+
