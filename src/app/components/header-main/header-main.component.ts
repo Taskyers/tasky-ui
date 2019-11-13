@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Swal } from '../../shared/utilities/swal';
 import swal from 'sweetalert2';
-import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-header-main',
@@ -25,13 +24,12 @@ export class HeaderMainComponent implements OnInit {
         private router: Router,
         private modalService: NgbModal,
         private formBuilder: FormBuilder,
-        private location: Location
     ) { }
 
     ngOnInit() {
         this.newProjectForm = this.formBuilder.group({
             name: [ '', [ Validators.required ] ],
-            description: [ '', [ Validators.required ] ]
+            description: [ '' ]
         });
     }
 
@@ -49,9 +47,9 @@ export class HeaderMainComponent implements OnInit {
             this.http.post<any>(environment.baseUrl + '/secure/projects', this.newProjectForm.value)
                 .subscribe(
                     (result) => {
+                        Swal.swalSuccessMessageWithReload(result.message, location);
                         this.modalReference.close();
-                        Swal.swalSuccessMessage(result.message);
-                        location.reload();
+
                     },
                     error => {
                         Swal.swalRegistrationFailWithMessage(error.error[ 0 ].message);
