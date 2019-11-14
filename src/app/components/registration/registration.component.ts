@@ -48,9 +48,6 @@ export class RegistrationComponent implements OnInit {
                         Swal.swalRegistrationFail();
                     }
                 );
-            swal.fire({
-                showConfirmButton: true
-            });
         }
     }
 }

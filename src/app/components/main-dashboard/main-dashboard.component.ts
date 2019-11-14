@@ -71,9 +71,6 @@ export class MainDashboardComponent implements OnInit {
                         Swal.swalRegistrationFailWithMessage(error.error[ 0 ].message);
                     }
                 );
-            swal.fire({
-                showConfirmButton: true
-            });
         }
     }
 
