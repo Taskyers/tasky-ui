@@ -1,5 +1,4 @@
 import swal from 'sweetalert2';
-import { Location } from '@angular/common';
 
 export class Swal {
     static swalLoginInvalidData() {

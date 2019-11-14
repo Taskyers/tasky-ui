@@ -55,9 +55,6 @@ export class HeaderMainComponent implements OnInit {
                         Swal.swalRegistrationFailWithMessage(error.error[ 0 ].message);
                     }
                 );
-            swal.fire({
-                showConfirmButton: true
-            });
         }
     }
 }
