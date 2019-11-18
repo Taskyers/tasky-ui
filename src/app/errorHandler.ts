@@ -8,7 +8,7 @@ export class ErrorHandler {
     ) { }
 
     public handleError(err: any) {
-        if ( err.status === 403 ) {
+        if ( err.status === 403 || err.status === 404) {
             this.router.navigate([ '/pageNotFound' ]);
         }
     }

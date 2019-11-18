@@ -1,0 +1,33 @@
+<HTML>
+<body>
+<div class = "login-form bg-dark">
+	<h3>Invite to project</h3>
+	<form [formGroup] = "projectInvitationForm" (ngSubmit) = "onSubmit()">
+		<div class = "form-group">
+			<label for = "projectNameInvitationForm">
+				<input type = "text" formControlName = "username" id = "usernameInvitationForm"
+				       class = "form-control"
+				       placeholder = "Username" autocomplete = "off" />
+			</label>
+			<div *ngIf = "projectInvitationForm.controls['username'].invalid && (projectInvitationForm.controls['username'].dirty || projectInvitationForm.controls['username'].touched)"
+			     class = "alert alert-danger">
+				<project-invitation-message [control] = "projectInvitationForm.get('username')"></project-invitation-message>
+
+			</div>
+		</div>
+		<div class = "form-group">
+			<label for = "projectNameInvitationForm">
+				<input type = "text" formControlName = "projectName" id = "projectNameInvitationForm"
+				       class = "form-control" placeholder = "Project name" autocomplete = "off">
+			</label>
+			<div *ngIf = "projectInvitationForm.controls['projectName'].invalid && (projectInvitationForm.controls['projectName'].dirty || projectInvitationForm.controls['projectName'].touched)"
+			     class = "alert alert-danger">
+				<project-invitation-message [control] = "projectInvitationForm.get('projectName')"></project-invitation-message>
+			</div>
+		</div>
+		<button class = "btn btn-info my-4 btn-block" type = "submit" [disabled] = "!projectInvitationForm.valid">Invite!</button>
+	</form>
+</div>
+<router-outlet></router-outlet>
+</body>
+</HTML>
