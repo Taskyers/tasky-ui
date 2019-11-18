@@ -9,7 +9,6 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationMessagesComponent } from './shared/messages/registration-messages/registration-messages.component';
-import { RegistrationValidatorService } from './shared/validators/registration/registration-validator.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginMessagesComponent } from './shared/messages/login-messages/login-messages.component';
@@ -27,6 +26,10 @@ import { ErrorHandler } from './errorHandler';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NewProjectMessagesComponent } from './shared/messages/new-project-messages/new-project-messages.component';
 import { ViewAllProjectsComponent } from './components/view-all-projects/view-all-projects.component';
+import { ProjectInvitationComponent } from './components/project-invitation/project-invitation.component';
+import { ProjectInvitationAcceptComponent } from './components/project-invitation-accept/project-invitation-accept.component';
+import { RegistrationValidatorService } from './shared/validators/registration/registration-validator.service';
+import { ProjectInvitationMessagesComponent } from './shared/messages/project-invitation-messages/project-invitation-messages.component';
 
 export let InjectorInstance: Injector;
 
@@ -40,6 +43,9 @@ const appRoutes: Routes = [
     { path: 'passwordRecovery/:token', component: UpdatePasswordComponent },
     { path: 'pageNotFound', component: PageNotFoundComponent },
     { path: 'viewAllProjects', component: ViewAllProjectsComponent },
+    { path: 'projectInvite', component: ProjectInvitationComponent },
+    { path: 'secure/projectInvitation/:token', component: ProjectInvitationAcceptComponent }
+
 ];
 
 @NgModule({
@@ -61,6 +67,9 @@ const appRoutes: Routes = [
         PageNotFoundComponent,
         NewProjectMessagesComponent,
         ViewAllProjectsComponent,
+        ProjectInvitationComponent,
+        ProjectInvitationAcceptComponent,
+        ProjectInvitationMessagesComponent,
     ],
     imports: [
         BrowserModule,

@@ -38,7 +38,7 @@ export class UpdatePasswordComponent implements OnInit {
             Swal.swalSuccessMessageWithRouting(result.message, this.router, '');
           },
           error => {
-            Swal.swalErrorMessageWithRouting(error.error.message, this.router);
+            Swal.swalErrorMessageWithRouting(error.error.message, this.router, '');
           }
         );
     }
