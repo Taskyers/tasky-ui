@@ -30,6 +30,7 @@ import { ProjectInvitationComponent } from './components/project-invitation/proj
 import { ProjectInvitationAcceptComponent } from './components/project-invitation-accept/project-invitation-accept.component';
 import { RegistrationValidatorService } from './shared/validators/registration/registration-validator.service';
 import { ProjectInvitationMessagesComponent } from './shared/messages/project-invitation-messages/project-invitation-messages.component';
+import { ProjectSettingsComponent } from './components/project-settings/project-settings.component';
 
 export let InjectorInstance: Injector;
 
@@ -44,7 +45,9 @@ const appRoutes: Routes = [
     { path: 'pageNotFound', component: PageNotFoundComponent },
     { path: 'viewAllProjects', component: ViewAllProjectsComponent },
     { path: 'projectInvite', component: ProjectInvitationComponent },
-    { path: 'secure/projectInvitation/:token', component: ProjectInvitationAcceptComponent }
+    { path: 'secure/projectInvitation/:token', component: ProjectInvitationAcceptComponent },
+    { path: 'viewAllProjects/:project', component: ProjectSettingsComponent },
+    { path: 'mainDashboard/:project', component: ProjectSettingsComponent }
 
 ];
 
@@ -70,6 +73,7 @@ const appRoutes: Routes = [
         ProjectInvitationComponent,
         ProjectInvitationAcceptComponent,
         ProjectInvitationMessagesComponent,
+        ProjectSettingsComponent,
     ],
     imports: [
         BrowserModule,

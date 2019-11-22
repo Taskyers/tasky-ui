@@ -18,7 +18,7 @@
 						<tbody>
 						<tr *ngFor = "let project of projects | slice:startPagination:paginationLimit">
 							<td>
-								<a class = "text-info" [routerLink] = "">{{project.name}}</a>
+								<a class = "text-info" [routerLink] = "[project.name]">{{project.name}}</a>
 							</td>
 							<td>{{project.description}}</td>
 							<td>{{project.owner}}</td>
