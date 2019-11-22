@@ -1,0 +1,34 @@
+<html>
+
+<app-header-main></app-header-main>
+
+<button (click) = "delete()"
+        class = "btn btn-secondary mr-2">Delete!
+</button>
+
+<form [formGroup] = "updateProjectForm" (ngSubmit) = "update()">
+	<div class = "form-group">
+		<label for = "projectNameUpdateProjectForm">
+			<input type = "text" formControlName = "name" id = "projectNameUpdateProjectForm"
+			       class = "form-control"
+			       placeholder = "Project name" autocomplete = "off" [value] = "projectName" />
+		</label>
+		<div *ngIf = "updateProjectForm.controls['name'].invalid && updateProjectForm.controls['name'].touched"
+		     class = "alert alert-danger">
+
+		</div>
+	</div>
+	<div class = "form-group">
+		<label for = "descriptionUpdateProjectForm">
+			<textarea type = "text" formControlName = "description" id = "descriptionUpdateProjectForm"
+			          class = "form-control" placeholder = "Project description" autocomplete = "off"
+			          [value] = "projectDescription"></textarea>
+		</label>
+		<div *ngIf = "updateProjectForm.controls['description'].invalid && updateProjectForm.controls['description'].touched"
+		     class = "alert alert-danger">
+		</div>
+	</div>
+	<button class = "btn btn-info my-4" type = "submit" [disabled] = "!updateProjectForm.valid">Update!</button>
+</form>
+</html>
+
