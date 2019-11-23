@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Swal } from '../../shared/utilities/swal';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-project-invitation',
@@ -13,15 +14,22 @@ import { Swal } from '../../shared/utilities/swal';
 export class ProjectInvitationComponent implements OnInit {
     projectInvitationForm: any;
 
+    usernames: any = [];
+
+    usernamesSize: any;
+
+    debouncer: any;
+
     constructor(
         private http: HttpClient,
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
         this.projectInvitationForm = this.formBuilder.group({
-            username: [ '', [ Validators.required] ],
+            username: [ '', [ Validators.required ] ],
             projectName: [ '', [ Validators.required ] ],
         });
     }
@@ -41,6 +49,28 @@ export class ProjectInvitationComponent implements OnInit {
                 );
         }
 
+    }
+
+    getUsernameList() {
+
+        return new Promise(resolve => {
+
+            if ( this.projectInvitationForm.get('username').value.length > 0 ) {
+                this.authService.dynamicSearchUsernameList(this.projectInvitationForm.get('username').value).subscribe((res) => {
+                    this.usernames = res;
+                    this.usernamesSize = this.usernames.length;
+                });
+            }
+            this.debouncer = setTimeout(() => {
+
+            }, 50);
+
+        });
+
+    }
+
+    setValue(username: any) {
+        this.projectInvitationForm.get('username').setValue(username);
     }
 
 }

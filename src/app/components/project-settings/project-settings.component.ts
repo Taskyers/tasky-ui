@@ -20,8 +20,6 @@ export class ProjectSettingsComponent implements OnInit {
 
     updateProjectForm: any;
 
-    const;
-
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',

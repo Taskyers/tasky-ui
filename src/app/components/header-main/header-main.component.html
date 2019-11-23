@@ -9,7 +9,7 @@
 	<div class = "navbar-collapse collapse w-75 order-1 order-md-0 dual-collapse2">
 		<ul class = "navbar-nav mr-auto">
 			<li class = "nav-item">
-				<a class = "btn btn-info button-nav-link" [routerLink]="[ '/viewAllProjects' ]">View all projects</a>
+				<a class = "btn btn-info button-nav-link" [routerLink] = "[ '/viewAllProjects' ]">View all projects</a>
 			</li>&nbsp;
 			<li class = "nav-item">
 				<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new
@@ -54,11 +54,12 @@
 			<span aria-hidden = "true">&times;</span>
 		</button>
 	</div>
-	<form [formGroup] = "newProjectForm" (ngSubmit)="onSubmit()">
+	<form [formGroup] = "newProjectForm" (ngSubmit) = "onSubmit()" class = "dropdown">
 		<div class = "modal-body">
 
 			<div class = "form-group">
 				<label for = "defaultNewProjectFormName">
+
 					<input type = "text" formControlName = "name" id = "defaultNewProjectFormName"
 					       class = "form-control"
 					       placeholder = "Name" autocomplete = "off" />

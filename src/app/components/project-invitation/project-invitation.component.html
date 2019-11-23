@@ -5,13 +5,28 @@
 	<form [formGroup] = "projectInvitationForm" (ngSubmit) = "onSubmit()">
 		<div class = "form-group">
 			<label for = "projectNameInvitationForm">
-				<input type = "text" formControlName = "username" id = "usernameInvitationForm"
-				       class = "form-control"
-				       placeholder = "Username" autocomplete = "off" />
+				<div class = "d-inline-block" ngbDropdown #myDrop = "ngbDropdown">
+
+					<input type = "text" formControlName = "username" id = "usernameInvitationForm"
+					       class = "form-control"
+					       placeholder = "Username" autocomplete = "off" (keyup) = "getUsernameList(); myDrop.open()" />
+
+					<div *ngIf = "usernamesSize > 0" ngbDropdownMenu aria-labelledby = "projectNameInvitationForm">
+						<tr *ngFor = "let username of usernames">
+							<td>
+								<button ngbDropdownItem ngbDropdownAnchor type = "button"
+								        (click) = "setValue(username); myDrop.close()">{{username}}</button>
+							</td>
+						</tr>
+					</div>
+				</div>
 			</label>
+
 			<div *ngIf = "projectInvitationForm.controls['username'].invalid && (projectInvitationForm.controls['username'].dirty || projectInvitationForm.controls['username'].touched)"
 			     class = "alert alert-danger">
-				<project-invitation-message [control] = "projectInvitationForm.get('username')"></project-invitation-message>
+
+				<project-invitation-message
+						[control] = "projectInvitationForm.get('username')"></project-invitation-message>
 
 			</div>
 		</div>
@@ -22,10 +37,13 @@
 			</label>
 			<div *ngIf = "projectInvitationForm.controls['projectName'].invalid && (projectInvitationForm.controls['projectName'].dirty || projectInvitationForm.controls['projectName'].touched)"
 			     class = "alert alert-danger">
-				<project-invitation-message [control] = "projectInvitationForm.get('projectName')"></project-invitation-message>
+				<project-invitation-message
+						[control] = "projectInvitationForm.get('projectName')"></project-invitation-message>
 			</div>
 		</div>
-		<button class = "btn btn-info my-4 btn-block" type = "submit" [disabled] = "!projectInvitationForm.valid">Invite!</button>
+		<button class = "btn btn-info my-4 btn-block" type = "submit" [disabled] = "!projectInvitationForm.valid">
+			Invite!
+		</button>
 	</form>
 </div>
 <router-outlet></router-outlet>
