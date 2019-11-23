@@ -46,3 +46,6 @@
         text-shadow : 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff, 0 0 10px #fff, 0 0 12px #fff, 0 0 13px #fff;
     }
 }
+.dropdown-toggle::after {
+    display:none;
+}
