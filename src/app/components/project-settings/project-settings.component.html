@@ -11,18 +11,18 @@
 		<label for = "projectNameUpdateProjectForm">
 			<input type = "text" formControlName = "name" id = "projectNameUpdateProjectForm"
 			       class = "form-control"
-			       placeholder = "Project name" autocomplete = "off" [value] = "projectName" />
+			       placeholder = "Project name" autocomplete = "off" />
 		</label>
 		<div *ngIf = "updateProjectForm.controls['name'].invalid && updateProjectForm.controls['name'].touched"
 		     class = "alert alert-danger">
+			<project-settings-message [control] = "updateProjectForm.get('name')"></project-settings-message>
 
 		</div>
 	</div>
 	<div class = "form-group">
 		<label for = "descriptionUpdateProjectForm">
 			<textarea type = "text" formControlName = "description" id = "descriptionUpdateProjectForm"
-			          class = "form-control" placeholder = "Project description" autocomplete = "off"
-			          [value] = "projectDescription"></textarea>
+			          class = "form-control" placeholder = "Project description" autocomplete = "off"></textarea>
 		</label>
 		<div *ngIf = "updateProjectForm.controls['description'].invalid && updateProjectForm.controls['description'].touched"
 		     class = "alert alert-danger">

@@ -78,4 +78,14 @@ export class Swal {
             router.navigate([ page ]);
         });
     }
+
+    static swalErrorMessage(message) {
+        swal.fire({
+            type: 'error',
+            title: 'Something went wrong',
+            text: message,
+            showConfirmButton: true,
+            timer: 2000,
+        });
+    }
 }

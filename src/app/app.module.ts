@@ -31,6 +31,7 @@ import { ProjectInvitationAcceptComponent } from './components/project-invitatio
 import { RegistrationValidatorService } from './shared/validators/registration/registration-validator.service';
 import { ProjectInvitationMessagesComponent } from './shared/messages/project-invitation-messages/project-invitation-messages.component';
 import { ProjectSettingsComponent } from './components/project-settings/project-settings.component';
+import { ProjectSettingsMessagesComponent } from './shared/messages/project-settings-messages/project-settings-messages.component';
 
 export let InjectorInstance: Injector;
 
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
         ProjectInvitationAcceptComponent,
         ProjectInvitationMessagesComponent,
         ProjectSettingsComponent,
+        ProjectSettingsMessagesComponent,
     ],
     imports: [
         BrowserModule,

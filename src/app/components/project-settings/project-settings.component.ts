@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
+import { Swal } from '../../shared/utilities/swal';
 
 @Component({
     selector: 'app-project-settings',
@@ -33,30 +34,32 @@ export class ProjectSettingsComponent implements OnInit {
 
     ngOnInit() {
         this.projectName = this.route.snapshot.paramMap.get('project');
-
+        this.updateProjectForm = this.formBuilder.group({
+            name: [ this.projectName, [ Validators.required ] ],
+            description: [ '', [] ],
+        });
         this.http.get(environment.baseUrl + '/secure/projects/settings/' + this.projectName)
             .subscribe((data: any) => {
                 this.projectId = data.id;
                 this.projectDescription = data.description;
+                this.updateProjectForm.controls.description.setValue(data.description);
             });
-        this.updateProjectForm = this.formBuilder.group({
-            name: [ '' ],
-            description: [ '' ],
-        });
+
 
     }
 
     delete() {
-        this.http.delete(environment.baseUrl + '/secure/projects/settings/' + this.projectId).subscribe();
+        this.http.delete<any>(environment.baseUrl + '/secure/projects/settings/' + this.projectId).subscribe(res => {
+            Swal.swalSuccessMessageWithRouting(res.message, this.router, 'mainDashboard');
+        });
     }
 
     update() {
-        console.log(this.updateProjectForm);
-
         this.http.put<any>(environment.baseUrl + '/secure/projects/settings/' + this.projectId, this.updateProjectForm.value,
-            this.httpOptions).subscribe();
-        this.router.navigate(['mainDashboard']).then(() => {
-            window.location.reload();
+            this.httpOptions).subscribe(res => {
+            Swal.swalSuccessMessageWithRouting(res.message, this.router, 'mainDashboard');
+        }, err => {
+            Swal.swalErrorMessage(err.error[0].message);
         });
     }
 
