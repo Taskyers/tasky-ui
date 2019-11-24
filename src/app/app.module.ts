@@ -32,6 +32,7 @@ import { RegistrationValidatorService } from './shared/validators/registration/r
 import { ProjectInvitationMessagesComponent } from './shared/messages/project-invitation-messages/project-invitation-messages.component';
 import { ProjectSettingsComponent } from './components/project-settings/project-settings.component';
 import { ProjectSettingsMessagesComponent } from './shared/messages/project-settings-messages/project-settings-messages.component';
+import { AutosizeModule } from 'ngx-autosize';
 
 export let InjectorInstance: Injector;
 
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         NgbModule,
+        AutosizeModule
     ],
     providers: [
         RegistrationValidatorService,
