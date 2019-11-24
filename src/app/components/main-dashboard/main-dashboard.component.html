@@ -20,7 +20,7 @@
 							<td>
 								<a class = "text-info" [routerLink] = "[project.name]">{{project.name}}</a>
 							</td>
-							<td>{{project.description}}</td>
+							<td class = "font-italic">{{project.description}}</td>
 							<td>{{project.owner}}</td>
 						</tr>
 						</tbody>
@@ -35,13 +35,15 @@
 				<ng-template #elseBlock>
 					<div class = "text-center font-weight-bolder">
 						You are currently not assigned to any project. Why don't create one? <br>
-						<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new project</a>
+						<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create
+						                                                                                      new
+						                                                                                      project</a>
 					</div>
 				</ng-template>
 			</div>
 		</div>
 	</div>
-	<a [routerLink]="['/projectInvite']">Invite to project!</a>
+	<a [routerLink] = "['/projectInvite']">Invite to project!</a>
 </div>
 </body>
 
@@ -52,7 +54,7 @@
 			<span aria-hidden = "true">&times;</span>
 		</button>
 	</div>
-	<form [formGroup] = "newProjectForm" (ngSubmit)="onSubmit()">
+	<form [formGroup] = "newProjectForm" (ngSubmit) = "onSubmit()">
 		<div class = "modal-body">
 
 			<div class = "form-group">

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
-import { catchError } from 'rxjs/operators';
 import { Swal } from '../../shared/utilities/swal';
 
 @Component({
@@ -20,6 +19,12 @@ export class ProjectSettingsComponent implements OnInit {
     projectDescription: string;
 
     updateProjectForm: any;
+
+    @Input()
+    canUpdate: boolean;
+
+    @Input()
+    canDelete: boolean;
 
     httpOptions = {
         headers: new HttpHeaders({
@@ -42,16 +47,18 @@ export class ProjectSettingsComponent implements OnInit {
             .subscribe((data: any) => {
                 this.projectId = data.id;
                 this.projectDescription = data.description;
+                this.canUpdate = data.canEditProject;
+                this.canDelete = data.canDeleteProject;
                 this.updateProjectForm.controls.description.setValue(data.description);
             });
-
-
     }
 
-    delete() {
-        this.http.delete<any>(environment.baseUrl + '/secure/projects/settings/' + this.projectId).subscribe(res => {
-            Swal.swalSuccessMessageWithRouting(res.message, this.router, 'mainDashboard');
-        });
+    async delete() {
+        if ( await Swal.swalDelete('Once deleted, you will not be able to recover this project!') ) {
+            this.http.delete<any>(environment.baseUrl + '/secure/projects/settings/' + this.projectId).subscribe(res => {
+                Swal.swalSuccessMessageWithRouting(res.message, this.router, 'mainDashboard');
+            });
+        }
     }
 
     update() {
@@ -59,7 +66,7 @@ export class ProjectSettingsComponent implements OnInit {
             this.httpOptions).subscribe(res => {
             Swal.swalSuccessMessageWithRouting(res.message, this.router, 'mainDashboard');
         }, err => {
-            Swal.swalErrorMessage(err.error[0].message);
+            Swal.swalErrorMessage(err.error[ 0 ].message);
         });
     }
 

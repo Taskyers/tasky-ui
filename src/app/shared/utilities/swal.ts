@@ -88,4 +88,20 @@ export class Swal {
             timer: 2000,
         });
     }
+
+    static async swalDelete(text) {
+        return swal.fire({
+            title: 'Are you sure?',
+            text,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonText: 'No, cancel',
+            cancelButtonClass: 'btn btn-danger',
+            reverseButtons: true,
+            buttonsStyling: false
+        });
+    }
+
 }
