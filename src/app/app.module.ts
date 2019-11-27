@@ -35,6 +35,8 @@ import { ProjectSettingsMessagesComponent } from './shared/messages/project-sett
 import { AutosizeModule } from 'ngx-autosize';
 import { ProjectUserListComponent } from './components/project-user-list/project-user-list.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSlideToggleModule} from '@angular/material';
 
 export let InjectorInstance: Injector;
 
@@ -91,7 +93,9 @@ const appRoutes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         NgbModule,
-        AutosizeModule
+        AutosizeModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule
     ],
     providers: [
         RegistrationValidatorService,
