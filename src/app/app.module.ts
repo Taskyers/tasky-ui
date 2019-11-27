@@ -7,7 +7,7 @@ import { Injector } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HomeComponent } from './components/home/home.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationMessagesComponent } from './shared/messages/registration-messages/registration-messages.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
@@ -33,6 +33,8 @@ import { ProjectInvitationMessagesComponent } from './shared/messages/project-in
 import { ProjectSettingsComponent } from './components/project-settings/project-settings.component';
 import { ProjectSettingsMessagesComponent } from './shared/messages/project-settings-messages/project-settings-messages.component';
 import { AutosizeModule } from 'ngx-autosize';
+import { ProjectUserListComponent } from './components/project-user-list/project-user-list.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 export let InjectorInstance: Injector;
 
@@ -49,7 +51,9 @@ const appRoutes: Routes = [
     { path: 'projectInvite', component: ProjectInvitationComponent },
     { path: 'secure/projectInvitation/:token', component: ProjectInvitationAcceptComponent },
     { path: 'viewAllProjects/:project', component: ProjectSettingsComponent },
-    { path: 'mainDashboard/:project', component: ProjectSettingsComponent }
+    { path: 'mainDashboard/:project', component: ProjectSettingsComponent },
+    { path: 'secure/projectUserList/:project', component: ProjectUserListComponent },
+    { path: 'secure/projectUserList/update/:userId/:project', component: UpdateUserComponent },
 
 ];
 
@@ -77,6 +81,8 @@ const appRoutes: Routes = [
         ProjectInvitationMessagesComponent,
         ProjectSettingsComponent,
         ProjectSettingsMessagesComponent,
+        ProjectUserListComponent,
+        UpdateUserComponent,
     ],
     imports: [
         BrowserModule,

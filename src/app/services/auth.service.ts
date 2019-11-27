@@ -19,4 +19,8 @@ export class AuthService {
         return this.http.get(environment.baseUrl + '/secure/projectInvitation/search/' + username);
     }
 
+    getUserRolesOfProject(projectName: string, userId: string) {
+        return this.http.get(environment.baseUrl + '/secure/project/settings/users/' + userId + '/' + projectName);
+    }
+
 }

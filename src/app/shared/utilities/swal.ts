@@ -89,10 +89,10 @@ export class Swal {
         });
     }
 
-    static async swalDelete(text) {
+    static async swalDelete(message) {
         return swal.fire({
             title: 'Are you sure?',
-            text,
+            text: message,
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it',
@@ -101,6 +101,13 @@ export class Swal {
             cancelButtonClass: 'btn btn-danger',
             reverseButtons: true,
             buttonsStyling: false
+        }).then((result) => {
+            if ( result.value ) {
+                return true;
+            } else {
+                return false;
+            }
+
         });
     }
 
