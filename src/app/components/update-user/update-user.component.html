@@ -1,0 +1,41 @@
+<html>
+<app-header-main></app-header-main>
+<body>
+<div class = "jumbotron min-vh-100 bg-light m-0 d-flex flex-column">
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-md-12 align-self-center">
+        <ng-template [ngIf] = "length > 0" [ngIfElse] = "elseBlock">
+          <h2>All users</h2>
+          <table class = "table table-striped table-break-word">
+            <thead>
+            <tr>
+              <th scope = "col">Key</th>
+              <th scope = "col">Description</th>
+              <th scope = "col">Checked</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor = "let role of roleList">
+              <td>{{role.key}}</td>
+              <td>{{role.description}}</td>
+              <td><mat-slide-toggle
+                (change)="onChange(role.key,role.description,$event)"
+                [checked]="role.checked">
+                Slide me!
+              </mat-slide-toggle></td>
+            </tr>
+            </tbody>
+          </table>
+          <button (click) = "updateRoleList()"
+                  class = "btn btn-secondary pull-right">Update Roles
+          </button>
+        </ng-template>
+        <ng-template #elseBlock>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

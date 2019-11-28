@@ -57,6 +57,8 @@ export class ProjectSettingsComponent implements OnInit {
         if ( await Swal.swalDelete('Once deleted, you will not be able to recover this project!') ) {
             this.http.delete<any>(environment.baseUrl + '/secure/projects/settings/' + this.projectId).subscribe(res => {
                 Swal.swalSuccessMessageWithRouting(res.message, this.router, 'mainDashboard');
+            }, error => {
+                Swal.swalErrorMessage(error.message);
             });
         }
     }
