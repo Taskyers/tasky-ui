@@ -22,10 +22,13 @@
 							<td>{{user.personals}}</td>
 							<td>{{user.email}}</td>
 							<td>
-								<button [routerLink] = "[ '/secure/projectUserList/update/' + user.id + '/' + projectName ]">Update</button>
+								<button class = "btn btn-info"
+								        [routerLink] = "[ '/secure/projectUserList/update/' + user.id + '/' + projectName ]">
+									Update
+								</button>
 							</td>
 							<td>
-								<button (click) = "delete(user.id)">Delete</button>
+								<button class = "btn btn-danger" (click) = "delete(user.id)">Delete</button>
 							</td>
 						</tr>
 						</tbody>
