@@ -36,7 +36,20 @@ import { AutosizeModule } from 'ngx-autosize';
 import { ProjectUserListComponent } from './components/project-user-list/project-user-list.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSlideToggleModule} from '@angular/material';
+import {
+    DateAdapter,
+    MAT_DATE_FORMATS, MAT_DATE_LOCALE,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatSlideToggleModule
+} from '@angular/material';
+import { SprintsListComponent } from './components/sprints-list/sprints-list.component';
+import { SprintMessagesComponent } from './shared/messages/sprint-messages/sprint-messages.component';
+import { SprintValidatorService } from './shared/validators/sprints/sprint-validator.service';
+import { MatDatepickerModule } from '@angular/material';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 export let InjectorInstance: Injector;
 
@@ -50,12 +63,13 @@ const appRoutes: Routes = [
     { path: 'passwordRecovery/:token', component: UpdatePasswordComponent },
     { path: 'pageNotFound', component: PageNotFoundComponent },
     { path: 'viewAllProjects', component: ViewAllProjectsComponent },
-    { path: 'projectInvite', component: ProjectInvitationComponent },
+    { path: 'secure/projectInvite/:project', component: ProjectInvitationComponent },
     { path: 'secure/projectInvitation/:token', component: ProjectInvitationAcceptComponent },
     { path: 'viewAllProjects/:project', component: ProjectSettingsComponent },
     { path: 'mainDashboard/:project', component: ProjectSettingsComponent },
     { path: 'secure/projectUserList/:project', component: ProjectUserListComponent },
     { path: 'secure/projectUserList/update/:userId/:project', component: UpdateUserComponent },
+    { path: 'secure/sprints/list/:project', component: SprintsListComponent }
 
 ];
 
@@ -85,6 +99,8 @@ const appRoutes: Routes = [
         ProjectSettingsMessagesComponent,
         ProjectUserListComponent,
         UpdateUserComponent,
+        SprintsListComponent,
+        SprintMessagesComponent,
     ],
     imports: [
         BrowserModule,
@@ -95,16 +111,26 @@ const appRoutes: Routes = [
         NgbModule,
         AutosizeModule,
         BrowserAnimationsModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatIconModule,
+        MatInputModule
     ],
     providers: [
         RegistrationValidatorService,
+        SprintValidatorService,
         AuthService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
         ErrorHandler,
         NgbActiveModal,
-        NgbModal
+        NgbModal,
+        MatDatepickerModule,
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
+        { provide: MAT_DATE_FORMATS, useValue: SprintsListComponent.dateFormat },
     ],
+    exports: [ MatDatepickerModule ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule {
