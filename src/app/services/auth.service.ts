@@ -23,4 +23,10 @@ export class AuthService {
         return this.http.get(environment.baseUrl + '/secure/project/settings/users/' + userId + '/' + projectName);
     }
 
+    checkSprintNameNotTaken(sprintName: string, projectName: string) {
+        if ( sprintName.length > 0 ) {
+            return this.http.get(environment.baseUrl + '/secure/project/settings/sprints/' + sprintName + '/' + projectName);
+        }
+    }
+
 }

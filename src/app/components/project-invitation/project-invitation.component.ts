@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Swal } from '../../shared/utilities/swal';
 import { AuthService } from '../../services/auth.service';
@@ -20,17 +20,21 @@ export class ProjectInvitationComponent implements OnInit {
 
     debouncer: any;
 
+    projectName: any;
+
     constructor(
         private http: HttpClient,
         private formBuilder: FormBuilder,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        this.projectName = this.route.snapshot.paramMap.get('project');
         this.projectInvitationForm = this.formBuilder.group({
             username: [ '', [ Validators.required ] ],
-            projectName: [ '', [ Validators.required ] ],
+            projectName: [ this.projectName, [ Validators.required ] ],
         });
     }
 

@@ -1,0 +1,158 @@
+<html>
+<app-header-main></app-header-main>
+<body>
+<div class = "jumbotron min-vh-100 bg-light m-0 d-flex flex-column">
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-12 align-self-center">
+				<ng-template [ngIf] = "length > 0" [ngIfElse] = "elseBlock">
+					<h2>List of sprints of project {{projectName}}</h2>
+					<table class = "table table-striped table-break-word">
+						<thead>
+						<tr>
+							<th scope = "col">Sprint name</th>
+							<th scope = "col">Date of start</th>
+							<th scope = "col">Date of finish</th>
+							<th scope = "col" colspan = "2">Actions</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor = "let sprint of sprints">
+							<td>{{sprint.name}}</td>
+							<td>{{sprint.start}}</td>
+							<td>{{sprint.end}}</td>
+							<td>
+								<button class = "btn btn-info"
+								        (click) = "openUpdateModal(contentUpdate, sprint.id)"
+								        [disabled] = "sprint.current">
+									Update
+								</button>
+							</td>
+							<td>
+								<button class = "btn btn-danger" (click) = "delete(sprint.id)">Delete</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class = "float-right">
+						<button class = "btn btn-info" (click) = "openCreateModal(contentCreate)">+ Create new sprint
+						</button>
+					</div>
+				</ng-template>
+				<ng-template #elseBlock>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+<ng-template #contentUpdate let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "updateModal">Update sprint!</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "updateSprintForm" (ngSubmit) = "update()">
+		<div class = "modal-body">
+
+			<div class = "form-group">
+				<label for = "updateSprintName">
+					<input type = "text" formControlName = "name" id = "updateSprintName"
+					       class = "form-control"
+					       placeholder = "Name" autocomplete = "off" />
+				</label>
+				<div *ngIf = "updateSprintForm.controls['name'].invalid"
+				     class = "alert alert-danger">
+					<sprint-message [control] = "updateSprintForm.get('name')"></sprint-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "updateSprintStartDate">
+					<mat-form-field>
+						<input matInput [matDatepicker] = "updatePickerStart" placeholder = "Choose a date"
+						       formControlName = "start" id = "updateSprintStartDate" class = "form-control">
+						<mat-datepicker-toggle matSuffix [for] = "updatePickerStart"></mat-datepicker-toggle>
+						<mat-datepicker #updatePickerStart></mat-datepicker>
+					</mat-form-field>
+				</label>
+			</div>
+
+			<div class = "form-group">
+				<label for = "updateSprintEndDate">
+					<mat-form-field>
+						<input matInput [matDatepicker] = "updatePickerEnd" placeholder = "Choose a date"
+						       formControlName = "end" id = "updateSprintEndDate" class = "form-control">
+						<mat-datepicker-toggle matSuffix [for] = "updatePickerEnd"></mat-datepicker-toggle>
+						<mat-datepicker #updatePickerEnd></mat-datepicker>
+					</mat-form-field>
+				</label>
+			</div>
+
+		</div>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!updateSprintForm.valid">Update!
+			</button>
+		</div>
+	</form>
+</ng-template>
+
+<ng-template #contentCreate let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "createModal">Create sprint!</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "createSprintForm" (ngSubmit) = "create()">
+		<div class = "modal-body">
+
+			<div class = "form-group">
+				<label for = "createSprintName">
+					<input type = "text" formControlName = "name" id = "createSprintName"
+					       class = "form-control"
+					       placeholder = "Name" autocomplete = "off" />
+				</label>
+				<div *ngIf = "createSprintForm.controls['name'].invalid && createSprintForm.controls['name'].touched"
+				     class = "alert alert-danger">
+					<sprint-message [control] = "createSprintForm.get('name')"></sprint-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "createSprintStartDate">
+					<mat-form-field>
+						<input matInput [matDatepicker] = "createPickerStart" placeholder = "Choose a date"
+						       formControlName = "start" id = "createSprintStartDate" class = "form-control"
+						       (change) = "setCreateStartDate($event)">
+						<mat-datepicker-toggle matSuffix [for] = "createPickerStart"></mat-datepicker-toggle>
+						<mat-datepicker #createPickerStart></mat-datepicker>
+					</mat-form-field>
+				</label>
+			</div>
+
+			<div class = "form-group">
+				<label for = "createSprintEndDate">
+					<mat-form-field>
+						<input matInput [matDatepicker] = "createPickerEnd" placeholder = "Choose a date"
+						       formControlName = "end" id = "createSprintEndDate" class = "form-control"
+						       (change) = "setCreateEndDate($event)">
+						<mat-datepicker-toggle matSuffix [for] = "createPickerEnd"></mat-datepicker-toggle>
+						<mat-datepicker #createPickerEnd></mat-datepicker>
+					</mat-form-field>
+				</label>
+			</div>
+
+		</div>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!createSprintForm.valid">Create!
+			</button>
+		</div>
+	</form>
+</ng-template>
+</html>
+
+
+
