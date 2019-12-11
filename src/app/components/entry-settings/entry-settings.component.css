@@ -1,0 +1,13 @@
+.btn-group-vertical > button{
+  margin-bottom:10px;
+  border-radius:10px !important;
+  width: 100%;
+}
+.table{
+  max-width: 80%;
+}
+
+.table-break-word {
+  table-layout : fixed;
+  word-wrap    : break-word;
+}
