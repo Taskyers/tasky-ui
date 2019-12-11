@@ -50,6 +50,11 @@ import { SprintMessagesComponent } from './shared/messages/sprint-messages/sprin
 import { SprintValidatorService } from './shared/validators/sprints/sprint-validator.service';
 import { MatDatepickerModule } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { EntrySettingsComponent } from './components/entry-settings/entry-settings.component';
+import {EntriesService} from './services/entries.service';
+import {EntrySettingsMessagesComponent} from './shared/messages/entry-settings-messages/entry-settings-messages.component';
+import {ColorPickerModule} from 'ngx-color-picker';
+
 
 export let InjectorInstance: Injector;
 
@@ -69,7 +74,8 @@ const appRoutes: Routes = [
     { path: 'mainDashboard/:project', component: ProjectSettingsComponent },
     { path: 'secure/projectUserList/:project', component: ProjectUserListComponent },
     { path: 'secure/projectUserList/update/:userId/:project', component: UpdateUserComponent },
-    { path: 'secure/sprints/list/:project', component: SprintsListComponent }
+    { path: 'secure/sprints/list/:project', component: SprintsListComponent },
+    { path: 'secure/projects/settings/entries/:project/:type', component: EntrySettingsComponent },
 
 ];
 
@@ -101,23 +107,26 @@ const appRoutes: Routes = [
         UpdateUserComponent,
         SprintsListComponent,
         SprintMessagesComponent,
+        EntrySettingsComponent,
+        EntrySettingsMessagesComponent,
     ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-        FormsModule,
-        ReactiveFormsModule,
-        NgbModule,
-        AutosizeModule,
-        BrowserAnimationsModule,
-        MatSlideToggleModule,
-        MatDatepickerModule,
-        MatFormFieldModule,
-        MatNativeDateModule,
-        MatIconModule,
-        MatInputModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    AutosizeModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatInputModule,
+    ColorPickerModule
+  ],
     providers: [
         RegistrationValidatorService,
         SprintValidatorService,
@@ -129,6 +138,7 @@ const appRoutes: Routes = [
         MatDatepickerModule,
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
         { provide: MAT_DATE_FORMATS, useValue: SprintsListComponent.dateFormat },
+        EntriesService
     ],
     exports: [ MatDatepickerModule ],
     bootstrap: [ AppComponent ]
