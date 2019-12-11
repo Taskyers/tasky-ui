@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     (result) => {
                         isSuccess = true;
-                        this.router.navigate([ '/mainDashboard' ]);
+                        this.router.navigate([ '/secure/mainDashboard' ]);
                     },
                     error => {
                         if ( !isSuccess ) {
