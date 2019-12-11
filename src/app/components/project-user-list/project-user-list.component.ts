@@ -34,7 +34,7 @@ export class ProjectUserListComponent implements OnInit {
     }
 
     async delete(userId: any) {
-        if ( await Swal.swalDelete('Once deleted, you will not be able to recover this project!') ) {
+        if ( await Swal.swalDelete('Are you sure to remove this user from that projectn') ) {
             this.http.delete<any>(environment.baseUrl + '/secure/project/settings/users/' + userId + '/' + this.projectName)
                 .subscribe(res => {
                     Swal.swalSuccessMessageWithReload(res.message, location);

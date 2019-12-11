@@ -43,39 +43,39 @@ import {
     MatIconModule,
     MatInputModule,
     MatNativeDateModule,
-    MatSlideToggleModule
+    MatSlideToggleModule, MatTooltipModule
 } from '@angular/material';
 import { SprintsListComponent } from './components/sprints-list/sprints-list.component';
 import { SprintMessagesComponent } from './shared/messages/sprint-messages/sprint-messages.component';
 import { SprintValidatorService } from './shared/validators/sprints/sprint-validator.service';
 import { MatDatepickerModule } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ProjectDashboardComponent } from './components/project-dashboard/project-dashboard.component';
 import { EntrySettingsComponent } from './components/entry-settings/entry-settings.component';
-import {EntriesService} from './services/entries.service';
-import {EntrySettingsMessagesComponent} from './shared/messages/entry-settings-messages/entry-settings-messages.component';
-import {ColorPickerModule} from 'ngx-color-picker';
-
+import { EntriesService } from './services/entries.service';
+import { EntrySettingsMessagesComponent } from './shared/messages/entry-settings-messages/entry-settings-messages.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 export let InjectorInstance: Injector;
 
 const appRoutes: Routes = [
     { path: 'register', component: RegistrationComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'mainDashboard', component: MainDashboardComponent },
+    { path: 'secure/mainDashboard', component: MainDashboardComponent },
     { path: '', component: HomeComponent },
     { path: 'activateAccount/:key', component: AccountActivationComponent },
     { path: 'recovery', component: PasswordRecoveryComponent },
     { path: 'passwordRecovery/:token', component: UpdatePasswordComponent },
     { path: 'pageNotFound', component: PageNotFoundComponent },
-    { path: 'viewAllProjects', component: ViewAllProjectsComponent },
-    { path: 'secure/projectInvite/:project', component: ProjectInvitationComponent },
+    { path: 'secure/viewAllProjects', component: ViewAllProjectsComponent },
+    { path: 'secure/:project/invite', component: ProjectInvitationComponent },
     { path: 'secure/projectInvitation/:token', component: ProjectInvitationAcceptComponent },
-    { path: 'viewAllProjects/:project', component: ProjectSettingsComponent },
-    { path: 'mainDashboard/:project', component: ProjectSettingsComponent },
-    { path: 'secure/projectUserList/:project', component: ProjectUserListComponent },
-    { path: 'secure/projectUserList/update/:userId/:project', component: UpdateUserComponent },
-    { path: 'secure/sprints/list/:project', component: SprintsListComponent },
-    { path: 'secure/projects/settings/entries/:project/:type', component: EntrySettingsComponent },
+    { path: 'secure/:project/settings', component: ProjectSettingsComponent },
+    { path: 'secure/:project/users', component: ProjectUserListComponent },
+    { path: 'secure/:project/users/update/:userId', component: UpdateUserComponent },
+    { path: 'secure/:project/sprints/list', component: SprintsListComponent },
+    { path: 'secure/:project/dashboard', component: ProjectDashboardComponent },
+    { path: 'secure/:project/entries/:type', component: EntrySettingsComponent }
 
 ];
 
@@ -109,24 +109,26 @@ const appRoutes: Routes = [
         SprintMessagesComponent,
         EntrySettingsComponent,
         EntrySettingsMessagesComponent,
+        ProjectDashboardComponent,
     ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    AutosizeModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatIconModule,
-    MatInputModule,
-    ColorPickerModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        RouterModule.forRoot(appRoutes),
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        AutosizeModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatIconModule,
+        MatInputModule,
+        ColorPickerModule,
+        MatTooltipModule
+    ],
     providers: [
         RegistrationValidatorService,
         SprintValidatorService,

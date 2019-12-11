@@ -1,0 +1,68 @@
+<html>
+<app-header-main></app-header-main>
+<body>
+<div class = "jumbotron min-vh-100 bg-light m-0 d-flex flex-column">
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-9 border-right">
+				TASKS
+			</div>
+			<div class = "col-md-3 border-left">
+				<div class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Display current sprint's board"
+					        matTooltipPosition = "right">Show board
+					</button>
+				</div>
+				<div *ngIf = "data.editProject" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Update or delete project"
+					        matTooltipPosition = "right" [routerLink] = "['/secure/' + projectName + '/settings']">
+						Project
+						settings
+					</button>
+				</div>
+				<div *ngIf = "data.invite" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Invite other to the project"
+					        matTooltipPosition = "right" [routerLink] = "['/secure/' + projectName + '/invite']">Invite
+					                                                                                             to
+					                                                                                             project
+					</button>
+				</div>
+				<div *ngIf = "data.manageUsers" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Update user's roles or remove them from the project"
+					        matTooltipPosition = "right" [routerLink] = "['/secure/' + projectName + '/users']">Manage
+					                                                                                            users
+					</button>
+				</div>
+				<div *ngIf = "data.managePriorities" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Manage task's priorities"
+					        matTooltipPosition = "right"
+					        [routerLink] = "['/secure/' + projectName + '/entries/PRIORITY']">
+						Manage priorities
+					</button>
+				</div>
+				<div *ngIf = "data.manageStatuses" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Manage task's statuses"
+					        matTooltipPosition = "right"
+					        [routerLink] = "['/secure/' + projectName + '/entries/STATUS']">
+						Manage statuses
+					</button>
+				</div>
+				<div *ngIf = "data.manageTypes" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Manage task's types"
+					        matTooltipPosition = "right" [routerLink] = "['/secure/' + projectName + '/entries/TYPE']">
+						Manage types
+					</button>
+				</div>
+				<div *ngIf = "data.manageSprints" class = "button-container">
+					<button class = "btn btn-info" matTooltip = "Manage project's sprints"
+					        matTooltipPosition = "right" [routerLink] = "['/secure/' + projectName + '/sprints/list']">
+						Manage
+						sprints
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
