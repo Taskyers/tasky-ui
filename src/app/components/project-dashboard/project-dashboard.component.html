@@ -5,7 +5,34 @@
 	<div class = "container">
 		<div class = "row">
 			<div class = "col-md-9 border-right">
-				TASKS
+				<ng-template [ngIf] = "dataTasksLenght > 0" [ngIfElse] = "elseBlock">
+					<table class = "table table-striped table-break-word">
+						<thead>
+						<tr>
+							<th scope = "col">Key</th>
+							<th scope = "col">Name</th>
+							<th scope = "col">Priority</th>
+							<th scope = "col">Status</th>
+							<th scope = "col">Type</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor = "let task of dataTasks">
+							<td>{{task.key}}</td>
+							<td class = "font-italic">{{task.name}}</td>
+							<td class = "border font-weight-bold rounded"
+							    [ngStyle] = "{'color': task.priority.textColor, 'background-color': task.priority.backgroundColor}">{{task.priority.value}}</td>
+							<td class = "border font-weight-bold rounded"
+							    [ngStyle] = "{'color': task.status.textColor, 'background-color': task.status.backgroundColor}">{{task.status.value}}</td>
+							<td class = "border font-weight-bold rounded"
+							    [ngStyle] = "{'color': task.type.textColor, 'background-color': task.type.backgroundColor}">{{task.type.value}}</td>
+						</tr>
+						</tbody>
+					</table>
+				</ng-template>
+				<ng-template #elseBlock>
+					<div class="text-center font-weight-bold">Your are currently not asigned to any task!</div>
+				</ng-template>
 			</div>
 			<div class = "col-md-3 border-left">
 				<div class = "button-container">
@@ -22,9 +49,9 @@
 				</div>
 				<div *ngIf = "data.invite" class = "button-container">
 					<button class = "btn btn-info" matTooltip = "Invite other to the project"
-					        matTooltipPosition = "right" [routerLink] = "['/secure/' + projectName + '/invite']">Invite
-					                                                                                             to
-					                                                                                             project
+					        matTooltipPosition = "right" (click) = open(inviteToProject)>Invite
+					                                                                     to
+					                                                                     project
 					</button>
 				</div>
 				<div *ngIf = "data.manageUsers" class = "button-container">
@@ -65,4 +92,43 @@
 	</div>
 </div>
 </body>
+
+<ng-template #inviteToProject let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "createModal">Invite to project!</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "projectInvitationForm" (ngSubmit) = "invite()" class = "text-center">
+		<div class = "form-group">
+			<div class = "d-inline-block" ngbDropdown #myDrop = "ngbDropdown">
+
+				<input type = "text" formControlName = "username" id = "usernameInvitationForm"
+				       class = "form-control"
+				       placeholder = "Username" autocomplete = "off" (keyup) = "getUsernameList(); myDrop.open()" />
+
+				<div *ngIf = "usernamesSize > 0" ngbDropdownMenu aria-labelledby = "projectNameInvitationForm">
+					<div *ngFor = "let username of usernames" ngbDropdownAnchor>
+						<button ngbDropdownItem type = "button"
+						        (click) = "setValue(username);">{{username}}</button>
+					</div>
+				</div>
+			</div>
+			<div *ngIf = "projectInvitationForm.controls['username'].invalid && (projectInvitationForm.controls['username'].dirty)"
+			     class = "alert alert-danger">
+
+				<project-invitation-message
+						[control] = "projectInvitationForm.get('username')"></project-invitation-message>
+
+			</div>
+		</div>
+		<div class = "modal-footer">
+			<button class = "btn btn-outline-dark" type = "submit">
+				Invite!
+			</button>
+		</div>
+	</form>
+</ng-template>
+
 </html>

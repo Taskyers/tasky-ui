@@ -18,3 +18,7 @@
 /deep/ .mat-tooltip {
     font-size : large !important;
 }
+
+.dropdown-toggle::after {
+    display:none;
+}
