@@ -19,8 +19,8 @@
         <tbody>
         <tr *ngFor = "let status of currentEntries">
           <td class = "font-italic">{{status.value}}</td>
-          <td class = "font-italic">{{status.textColor}}</td>
-          <td class = "font-italic">{{status.backgroundColor}}</td>
+          <td [ngStyle] = "{'background-color': status.textColor}" class = "border"></td>
+          <td [ngStyle] = "{'background-color': status.backgroundColor}" class = "border"></td>
           <td>
             <button class = "btn btn-info"
                     [routerLink] = "" (click)="update(edit, status)">
