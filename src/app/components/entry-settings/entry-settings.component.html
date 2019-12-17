@@ -73,19 +73,18 @@
       </div>
 
       <div class = "form-group">
-        <label for = "defaultNewEntryFormTextColor">Text Color
-        </label>
+        <label for = "defaultNewEntryFormTextColor">Text Color</label>
         <input [value]="textColor"
                [style.background]="textColor"
                [(colorPicker)]="textColor" formControlName = "textColor"  id = "defaultNewEntryFormTextColor"  class = "form-control"/>
       </div>
 
-      <div class = "form-group">Background Color
-        <label for = "defaultNewEntryFormBackgroundColor">
-        </label>
+      <div class = "form-group">
+        <label for = "defaultNewEntryFormBackgroundColor">Background Color</label>
         <input [value]="backgroundColor"
                [style.background]="backgroundColor"
-               [(colorPicker)]="backgroundColor" formControlName = "backgroundColor"  id = "defaultNewEntryFormBackgroundColor"  class = "form-control"/>
+               [(colorPicker)]="backgroundColor"
+               formControlName = "backgroundColor"  id = "defaultNewEntryFormBackgroundColor"  class = "form-control"/>
 
       </div>
 
@@ -95,6 +94,13 @@
                class = "form-control"
                autocomplete = "off" readonly="true" value="{{entryType}}"/>
       </div>
+
+      <div class="card col-sm-5 text-center mx-auto" [style.background-color]="backgroundColor" >
+        <div class="card-body" id="previewNewEntry" [style.color]="textColor">
+          Preview.
+        </div>
+      </div>
+
 
     </div>
     <div class = "modal-footer">
@@ -125,20 +131,18 @@
     </div>
 
     <div class = "form-group">
-      <label for = "defaultEditEntryFormTextColor">Text Color
+      <label for = "defaultEditEntryFormTextColor">Text Color</label>
         <input [value]="textColor"
                [style.background]="textColor"
                [(colorPicker)]="textColor" formControlName = "textColor"  id = "defaultEditEntryFormTextColor"  class = "form-control"/>
 
-      </label>
     </div>
 
     <div class = "form-group">
-      <label for = "defaultEditEntryFormBackgroundColor">Background Color
+      <label for = "defaultEditEntryFormBackgroundColor">Background Color</label>
         <input [value]="backgroundColor"
                [style.background]="backgroundColor"
                [(colorPicker)]="backgroundColor" formControlName = "backgroundColor"  id = "defaultEditEntryFormBackgroundColor"  class = "form-control"/>
-      </label>
     </div>
 
     <div class = "form-group">
@@ -146,6 +150,12 @@
       <input class="form-control" formControlName = "entryType" id="defaultEditEntryFormEntryType"
              class = "form-control"
              autocomplete = "off" readonly="true" value="{{entryType}}"/>
+    </div>
+
+    <div class="card col-sm-5 text-center mx-auto" [style.background-color]="backgroundColor" >
+      <div class="card-body" id="previewUpdateEntry" [style.color]="textColor">
+        Preview.
+      </div>
     </div>
 
   </div>
