@@ -78,7 +78,7 @@ export class EntrySettingsComponent implements OnInit {
 
     open(content) {
         this.backgroundColor = '#818181';
-        this.textColor = '#818181';
+        this.textColor = '#000000';
         this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
     }
 

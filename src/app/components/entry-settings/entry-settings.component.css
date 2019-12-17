@@ -11,3 +11,7 @@
   table-layout : fixed;
   word-wrap    : break-word;
 }
+
+#previewNewEntry,#previewUpdateEntry{
+  font-size: large;
+}
