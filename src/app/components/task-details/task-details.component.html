@@ -1,0 +1,212 @@
+<html>
+<app-header-main></app-header-main>
+<body>
+<div class = "jumbotron pt-5 min-vh-100 bg-light m-0 d-flex flex-column">
+  <div class = "container">
+      <div class="page-header pb-2 mb-2 border-bottom">
+        <h1>{{taskName}} <span style="font-size: 12px">/{{taskKey}}</span></h1>
+        <div class="row m-md-0">
+          <button class = "btn btn-info">
+            <span class="fa fa-pencil"></span> Edit Task
+          </button>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="col-md-8 border-right">
+        <div class="card">
+          <div class="card-header bg-primary">
+            Details
+          </div>
+          <div class="row">
+            <div class="col-sm details" align="center">
+              <div><span class="values">Type:</span>
+                <button type="button" class="btn btn-sm" [style.backgroundColor]=taskDetails.type.backgroundColor
+                        [style.color]=taskDetails.type.textColor title="Type" [ngbPopover]="popTypes">
+                  {{taskDetails.type.value}}
+                </button>
+              </div>
+              <div><span class="values">Priority:</span>
+                <button type="button" class="btn btn-sm" [style.backgroundColor]=taskDetails.priority.backgroundColor
+                        [style.color]=taskDetails.priority.textColor title="Priority" [ngbPopover]="popPriorities">
+                  {{taskDetails.priority.value}}
+                </button>
+              </div>
+              <div><span class="values">Status:</span>
+                <button type="button" class="btn btn-sm" [style.backgroundColor]=taskDetails.status.backgroundColor
+                        [style.color]=taskDetails.status.textColor title="Priority" [ngbPopover]="popStatuses">
+                  {{taskDetails.status.value}}
+                </button>
+              </div>
+            </div>
+            <div class="col-sm details" align="center">
+              <div><span class="values">Fix Version:</span> {{taskDetails.fixVersion}}</div>
+              <div><span class="values">Sprint:</span> {{taskDetails.sprint.name}}</div>
+              <div><span class="values">Resolution:</span>
+                <button type="button" class="btn btn-sm"  title="Resolution" style="background-color: #888888; color: #282726"  [ngbPopover]="popResolutions">
+                  {{taskDetails.resolution}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="card ">
+          <div class="card-header bg-primary">
+            Description
+          </div>
+          <div>{{taskDetails.description}}</div>
+        </div>
+
+
+        <div >
+          <div class="card">
+            <div class="card-header bg-primary">
+              Comments <span class="fa fa-comment"></span> <button class="fa fa-plus-circle fa-lg btn btn-sm float-right" (click)="open(content)"></button>
+            </div>
+
+            <div class="card-body widget p-0">
+              <ul class="list-group">
+                <li class="list-group-item comment" *ngFor = "let comment of comments">
+                  <div class="row">
+                    <div class="col-xs-10 col-md-11">
+                      <div>
+                        <div class="mic-info">
+                          By: <span style="color: #282726; font-weight: bold">{{comment.author}}</span> on {{comment.creationDate}} <ng-template [ngIf] = "comment.edited"><span style="font-size: small; color: coral">edited</span></ng-template>
+                        </div>
+                      </div>
+                      <div class="comment-text">
+                        {{comment.content}}
+                      </div>
+                      <div class="action">
+                        <button type="button" class="btn btn-primary btn-sm" title="Edit" *ngIf="comment.yours" (click)="update(edit,comment)">
+                          <span class="fa fa-pencil-square-o"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" title="Delete" *ngIf="comment.yours" (click)="delete(comment.id)">
+                          <span class="fa fa-trash-o"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 border-left people" align="center">
+        <div class="card">
+          <div class="card-header bg-primary">
+            People
+          </div>
+          <div class="peopleItem"><span class="values">Creator:</span> {{taskDetails.creator}}</div>
+          <div class="peopleItem"><span class="values">Assignee:</span> {{taskDetails.assignee}}</div>
+          <div>
+            <li class="list-group-item active py-1 listHeader"> Watchers:
+            </li>
+              <div class="watcherList">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor = "let watcher of taskDetails.watchers">{{watcher}}
+                  </li>
+                </ul>
+              </div>
+        </div>
+        </div>
+        <div class="card">
+          <div class="card-header bg-primary">
+            Dates
+          </div>
+          <div class="datesItem"><span class="values">Created:</span> {{taskDetails.creationDate}}</div>
+          <div class="datesItem"><span class="values">Updated:</span> {{taskDetails.updateDate}} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<ng-template #popPriorities>
+  <div class="row">
+  <div *ngFor = "let priority of priorities" class="popButton">
+    <button type="button" class="btn btn-sm popContent" [style.backgroundColor]=taskDetails.priority.backgroundColor
+            [style.color]=taskDetails.priority.textColor  title="Priority" [ngbPopover]="popPriorities">
+      {{priority}}
+    </button>
+  </div>
+  </div>
+</ng-template>
+<ng-template #popStatuses>
+  <div class="row">
+    <div *ngFor = "let status of statuses" class="popButton">
+      <button type="button" class="btn btn-sm popContent" [style.backgroundColor]=taskDetails.status.backgroundColor
+              [style.color]=taskDetails.status.textColor  title="Status" [ngbPopover]="popStatuses">
+        {{status}}
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #popTypes>
+  <div class="row">
+    <div *ngFor = "let type of types" class="popButton">
+      <button type="button" class="btn btn-sm popContent" [style.backgroundColor]=taskDetails.type.backgroundColor
+              [style.color]=taskDetails.type.textColor  title="Type" [ngbPopover]="popTypes">
+        {{type}}
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #popResolutions>
+  <div class="row">
+    <div *ngFor = "let resolution of resolutions" class="popButton">
+      <button type="button" class="btn btn-sm popContent" style="background-color: #888888; color: #282726"  title="Resolution" [ngbPopover]="popResolutions">
+        {{resolution}}
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #content let-modal>
+  <div class = "modal-header">
+    <h4 class = "modal-title" id = "modal-basic-title">Create new comment</h4>
+    <button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+      <span aria-hidden = "true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup] = "newCommentForm" (ngSubmit)="onSubmit()">
+    <div class = "modal-body">
+
+      <div class = "form-group">
+        <label for = "defaultNewCommentFormContent">Comment</label>
+        <textarea
+          formControlName = "content"  id = "defaultNewCommentFormContent"  class = "form-control"></textarea>
+      </div>
+    </div>
+    <div class = "modal-footer">
+      <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!newCommentForm.valid">Create!</button>
+    </div>
+  </form>
+</ng-template>
+
+
+<ng-template #edit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="upateEntry">Update Comment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup] = "updateCommentForm" (ngSubmit)="onUpdateSubmit(commentToUpdate.id)">
+    <div class = "modal-body">
+
+      <div class = "form-group">
+        <label for = "defaultEditCommentFormContent">Comment</label>
+        <textarea
+                  formControlName = "content"  id = "defaultEditCommentFormContent"  class = "form-control">{{commentToUpdate.content}}</textarea>
+      </div>
+    </div>
+    <div class = "modal-footer">
+      <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!updateCommentForm.valid">Update!</button>
+    </div>
+  </form>
+</ng-template>
+
+</html>

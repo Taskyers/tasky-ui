@@ -1,0 +1,25 @@
+
+/*.widget .card-body { padding:0px !important; }*/
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 16px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 15px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+.page-header {  background-color: rgba(86,61,124,.1);  border-radius: 5px;}
+.card {margin: 10px; padding: 10px}
+.details div {margin: 5px; padding: 5px}
+.details .popButton {pointer-events: none;margin: 1px !important; padding: 1px !important;}
+.listHeader {background-color: #888888; border-color: #888888; }
+.watcherList .list-group{
+  max-height: 100px;
+  overflow-y: auto ;
+}
+.peopleItem {margin: 5px !important; padding: 5px !important;}
+.datesItem {margin: 5px !important; padding: 5px !important;}
+.values {color: #666666}
+.comment{ margin: 2px !important; padding: 2px !important;}
+/*{'border-left': '3px solid blue !important'}*/

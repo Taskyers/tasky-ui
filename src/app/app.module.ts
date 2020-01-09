@@ -55,6 +55,7 @@ import { EntrySettingsComponent } from './components/entry-settings/entry-settin
 import { EntriesService } from './services/entries.service';
 import { EntrySettingsMessagesComponent } from './shared/messages/entry-settings-messages/entry-settings-messages.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 export let InjectorInstance: Injector;
 
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     { path: 'secure/:project/users/update/:userId', component: UpdateUserComponent },
     { path: 'secure/:project/sprints/list', component: SprintsListComponent },
     { path: 'secure/:project/dashboard', component: ProjectDashboardComponent },
-    { path: 'secure/:project/entries/:type', component: EntrySettingsComponent }
+    { path: 'secure/:project/entries/:type', component: EntrySettingsComponent },
+    { path: 'secure/tasks/:key', component: TaskDetailsComponent },
 
 ];
 
@@ -110,6 +112,7 @@ const appRoutes: Routes = [
         EntrySettingsComponent,
         EntrySettingsMessagesComponent,
         ProjectDashboardComponent,
+        TaskDetailsComponent,
     ],
     imports: [
         BrowserModule,
