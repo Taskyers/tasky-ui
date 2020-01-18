@@ -18,7 +18,7 @@
 						</thead>
 						<tbody>
 						<tr *ngFor = "let task of dataTasks">
-							<td>{{task.key}}</td>
+							<td><a [routerLink]="['/secure/tasks/' + task.key]"> {{task.key}}</a></td>
 							<td class = "font-italic">{{task.name}}</td>
 							<td class = "border font-weight-bold rounded"
 							    [ngStyle] = "{'color': task.priority.textColor, 'background-color': task.priority.backgroundColor}">{{task.priority.value}}</td>
@@ -37,7 +37,7 @@
 			<div class = "col-md-3 border-left">
 				<div class = "button-container">
 					<button class = "btn btn-info" matTooltip = "Display current sprint's board"
-					        matTooltipPosition = "right">Show board
+					        matTooltipPosition = "right" >Show board
 					</button>
 				</div>
 				<div *ngIf = "data.editProject" class = "button-container">

@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Swal } from '../../shared/utilities/swal';
 import swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-header-main',
@@ -15,21 +16,34 @@ import swal from 'sweetalert2';
 export class HeaderMainComponent implements OnInit {
     newProjectForm: any;
 
+    searchForm: any;
+
     modalReference = null;
 
     loupeIconPath = '../../assets/icons/loupe.png';
+
+    debouncer: any;
+
+    taskList: any;
+
+    taskListSize = 0;
 
     constructor(
         private http: HttpClient,
         private router: Router,
         private modalService: NgbModal,
         private formBuilder: FormBuilder,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
         this.newProjectForm = this.formBuilder.group({
             name: [ '', [ Validators.required ] ],
             description: [ '' ]
+        });
+
+        this.searchForm = this.formBuilder.group({
+            search: [ '' ]
         });
     }
 
@@ -56,5 +70,26 @@ export class HeaderMainComponent implements OnInit {
                     }
                 );
         }
+    }
+
+    getUsernameList() {
+
+        return new Promise(resolve => {
+            if ( this.searchForm.get('search').value.length > 0 ) {
+                this.authService.dynamicSearchTaskList(this.searchForm.get('search').value).subscribe((res) => {
+                    this.taskList = res;
+                    this.taskListSize = this.taskList.length;
+                });
+                this.debouncer = setTimeout(() => {
+                }, 50);
+            }
+        });
+
+    }
+
+    search(key: string) {
+        this.router.navigate([ '../secure/tasks/' + key ]).then(page => {
+            location.reload();
+        });
     }
 }

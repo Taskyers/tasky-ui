@@ -9,7 +9,8 @@
 	<div class = "navbar-collapse collapse w-75 order-1 order-md-0 dual-collapse2">
 		<ul class = "navbar-nav mr-auto">
 			<li class = "nav-item">
-				<a class = "btn btn-info button-nav-link" [routerLink] = "[ '/secure/viewAllProjects' ]">View all projects</a>
+				<a class = "btn btn-info button-nav-link" [routerLink] = "[ '/secure/viewAllProjects' ]">View all
+				                                                                                         projects</a>
 			</li>&nbsp;
 			<li class = "nav-item">
 				<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new
@@ -29,12 +30,29 @@
 			<li class = "nav-item">
 				<div class = "input-group">
 					<div class = "input-group-prepend">
-						<span class = "input-group-text" id = "searchTask"><div class = "loupeContainer"><img
-								[src] = "loupeIconPath"></div></span>
+						<span class = "input-group-text" id = "searchTask">
+							<div class = "loupeContainer">
+								<img [src] = "loupeIconPath">
+							</div>
+						</span>
 					</div>
-					<input type = "search" class = "form-control" placeholder = "Search for tasks"
-					       aria-label = "Search for tasks"
-					       aria-describedby = "searchTask">
+					<form [formGroup] = "searchForm">
+						<div class = "d-inline-block" ngbDropdown #myDrop = "ngbDropdown">
+							<input formControlName = "search" type = "search" class = "form-control"
+							       placeholder = "Search for tasks"
+							       aria-label = "Search for tasks"
+							       aria-describedby = "searchTask" (keyup) = "getUsernameList(); myDrop.open()">
+							<div *ngIf = "taskListSize > 0" ngbDropdownMenu
+							     aria-labelledby = "projectNameInvitationForm">
+								<tr *ngFor = "let task of taskList">
+									<td>
+										<button class = "w-100" ngbDropdownItem type = "button"
+										        (click) = "myDrop.close(); search(task.key) ">{{task.key}} - {{task.name}}</button>
+									</td>
+								</tr>
+							</div>
+						</div>
+					</form>
 				</div>
 			</li>&nbsp;
 			<li class = "nav-item">

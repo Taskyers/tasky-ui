@@ -19,6 +19,10 @@ export class AuthService {
         return this.http.get(environment.baseUrl + '/secure/projectInvitation/search/' + username);
     }
 
+    dynamicSearchTaskList(task: string) {
+        return this.http.get(environment.baseUrl + '/secure/tasks/search/' + task);
+    }
+
     getUserRolesOfProject(projectName: string, userId: string) {
         return this.http.get(environment.baseUrl + '/secure/project/settings/users/' + userId + '/' + projectName);
     }
