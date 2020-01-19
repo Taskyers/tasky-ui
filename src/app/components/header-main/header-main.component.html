@@ -9,19 +9,23 @@
 	<div class = "navbar-collapse collapse w-75 order-1 order-md-0 dual-collapse2">
 		<ul class = "navbar-nav mr-auto">
 			<li class = "nav-item">
-				<a class = "btn btn-info button-nav-link" [routerLink] = "[ '/secure/viewAllProjects' ]">View all
-				                                                                                         projects</a>
+				<button class = "btn btn-info button-nav-link" [routerLink] = "[ '/secure/viewAllProjects' ]">View all
+				                                                                                              projects
+				</button>
 			</li>&nbsp;
 			<li class = "nav-item">
-				<a class = "btn btn-info button-nav-link" [routerLink] = "" (click) = "open(content)">+ Create new
-				                                                                                      project</a>
+				<button class = "btn btn-info button-nav-link" (click) = "open(content)">+ Create new
+				                                                                         project
+				</button>
 			</li>&nbsp;
 		</ul>
 	</div>
 	<div class = "navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
 		<ul class = "navbar-nav mx-auto">
 			<li class = "nav-item">
-				<a class = "btn btn-primary button-nav-link" [routerLink] = "">+ Create new task</a>
+				<button class = "btn btn-primary button-nav-link" (click) = "open(create)">+ Create new
+				                                                                           task
+				</button>
 			</li>&nbsp;
 		</ul>
 	</div>
@@ -47,7 +51,8 @@
 								<tr *ngFor = "let task of taskList">
 									<td>
 										<button class = "w-100" ngbDropdownItem type = "button"
-										        (click) = "myDrop.close(); search(task.key) ">{{task.key}} - {{task.name}}</button>
+										        (click) = "myDrop.close(); search(task.key) ">{{task.key}}
+											- {{task.name}}</button>
 									</td>
 								</tr>
 							</div>
@@ -101,4 +106,140 @@
 			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!newProjectForm.valid">Create!</button>
 		</div>
 	</form>
+</ng-template>
+
+<ng-template #create let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "selectProject">Create new task</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<div class = "m-auto">
+		<mat-form-field class = "m-auto">
+			<mat-label>Select project</mat-label>
+			<mat-select [formControl] = "projectSelect" required>
+				<mat-option *ngFor = "let project of projectList"
+				            [value] = "project.name">{{project.name}}</mat-option>
+			</mat-select>
+			<mat-error *ngIf = "projectSelect.hasError('required')">Please choose a project</mat-error>
+		</mat-form-field>
+	</div>
+	<div class = "modal-footer">
+		<button class = "btn btn-outline-dark" [disabled] = "projectSelect.value.length <= 0"
+		        (click) = "nextStep(); open(createNext)">Next step
+		</button>
+	</div>
+</ng-template>
+
+<ng-template #createNext let-modal>
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "createTask">Create new task</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "createTaskForm" (ngSubmit) = "onSubmit()">
+		<div class = "modal-body">
+
+
+			<div class = "form-group">
+				<label for = "defaultNewTaskName">
+					<input type = "text" formControlName = "name" id = "defaultNewTaskName"
+					       class = "form-control"
+					       placeholder = "Name" autocomplete = "off" />
+				</label>
+				<div *ngIf = "createTaskForm.controls['name'].invalid && createTaskForm.controls['name'].touched"
+				     class = "alert alert-danger">
+					<new-task-message [control] = "createTaskForm.get('name')"></new-task-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "defaultNewTaskDescription">
+						<textarea type = "text-field" formControlName = "description" id = "defaultNewTaskDescription"
+						          class = "form-control"
+						          placeholder = "Description" autocomplete = "off"></textarea>
+				</label>
+			</div>
+
+			<div class = "form-group">
+				<mat-form-field>
+					<mat-label>Status</mat-label>
+					<mat-select formControlName = "status">
+						<mat-option *ngFor = "let status of projectStatuses"
+						            [value] = "status">{{status}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<div *ngIf = "createTaskForm.controls['status'].invalid && createTaskForm.controls['status'].touched"
+				     class = "alert alert-danger">
+					<new-task-message [control] = "createTaskForm.get('status')"></new-task-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<mat-form-field>
+					<mat-label>Priority</mat-label>
+					<mat-select formControlName = "priority">
+						<mat-option *ngFor = "let priority of projectPriorities"
+						            [value] = "priority">{{priority}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<div *ngIf = "createTaskForm.controls['priority'].invalid && createTaskForm.controls['priority'].touched"
+				     class = "alert alert-danger">
+					<new-task-message [control] = "createTaskForm.get('priority')"></new-task-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<mat-form-field>
+					<mat-label>Type</mat-label>
+					<mat-select formControlName = "type">
+						<mat-option *ngFor = "let type of projectTypes" [value] = "type">{{type}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<div *ngIf = "createTaskForm.controls['type'].invalid && createTaskForm.controls['type'].touched"
+				     class = "alert alert-danger">
+					<new-task-message [control] = "createTaskForm.get('type')"></new-task-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<mat-form-field>
+					<mat-label>Sprint</mat-label>
+					<mat-select formControlName = "sprint">
+						<mat-option *ngFor = "let sprint of projectSprints" [value] = "sprint.name">
+							<ng-template [ngIf] = "sprint.current" [ngIfElse] = "elseBlock">
+								{{sprint.name}} (Current sprint)
+							</ng-template>
+							<ng-template #elseBlock>
+								{{sprint.name}}
+							</ng-template>
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<div *ngIf = "createTaskForm.controls['sprint'].invalid && createTaskForm.controls['sprint'].touched"
+				     class = "alert alert-danger">
+					<new-task-message [control] = "createTaskForm.get('sprint')"></new-task-message>
+				</div>
+			</div>
+
+			<div class = "form-group">
+				<label for = "defaultNewTaskName">
+					<input type = "text" formControlName = "fixVersion" id = "defaultNewTaskFixVersion"
+					       class = "form-control"
+					       placeholder = "Version" autocomplete = "off" />
+				</label>
+				<div *ngIf = "createTaskForm.controls['fixVersion'].invalid && createTaskForm.controls['fixVersion'].touched"
+				     class = "alert alert-danger">
+					<new-task-message [control] = "createTaskForm.get('fixVersion')"></new-task-message>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<div class = "modal-footer">
+		<button class = "btn btn-outline-dark" [disabled] = "!createTaskForm.valid" (click) = "createTask()">Create!
+		</button>
+	</div>
 </ng-template>

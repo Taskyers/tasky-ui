@@ -2,168 +2,175 @@
 <app-header-main></app-header-main>
 <body>
 <div class = "jumbotron min-vh-100 bg-light m-0 d-flex flex-column">
-  <div class="container">
-  <div class="row">
-    <div class="col-md-12 align-self-center">
-      <ng-template [ngIf] = "length > 0" [ngIfElse] = "elseBlock">
-      <h2>Entries for {{projectName}}</h2>
-      <table class = "table table-striped table-break-word">
-        <thead>
-        <tr>
-          <th scope = "col">Value</th>
-          <th scope = "col">Text Color</th>
-          <th scope = "col">Background Color</th>
-          <th scope = "col" colspan = "2">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor = "let status of currentEntries">
-          <td class = "font-italic">{{status.value}}</td>
-          <td [ngStyle] = "{'background-color': status.textColor}" class = "border"></td>
-          <td [ngStyle] = "{'background-color': status.backgroundColor}" class = "border"></td>
-          <td>
-            <button class = "btn btn-info"
-                    [routerLink] = "" (click)="update(edit, status)">
-              Update
-            </button>
-          </td>
-          <td>
-            <button class = "btn btn-danger"  [routerLink] = "" (click)="delete(status.id)">Delete</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <button
-              class = "btn btn-secondary pull-right" (click)="open(content)">Add new entry
-      </button>
-      </ng-template>
-      <ng-template #elseBlock>
-        <div class = "text-center font-weight-bolder">
-          There are currently no entries of type {{entryType}} for project {{projectName}} <br>
-          <button
-            class = "btn btn-secondary pull-right" (click)="open(content)">Add new entry
-          </button>
-        </div>
-      </ng-template>
-    </div>
-  </div>
-  </div>
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-12 align-self-center">
+				<ng-template [ngIf] = "length > 0" [ngIfElse] = "elseBlock">
+					<h2>Entries for {{projectName}}</h2>
+					<table class = "table table-striped table-break-word">
+						<thead>
+						<tr>
+							<th scope = "col">Value</th>
+							<th scope = "col">Text Color</th>
+							<th scope = "col">Background Color</th>
+							<th scope = "col" colspan = "2">Actions</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor = "let status of currentEntries">
+							<td class = "font-italic">{{status.value}}</td>
+							<td [ngStyle] = "{'background-color': status.textColor}" class = "border"></td>
+							<td [ngStyle] = "{'background-color': status.backgroundColor}" class = "border"></td>
+							<td>
+								<button class = "btn btn-info"
+								        [routerLink] = "" (click) = "update(edit, status)">
+									Update
+								</button>
+							</td>
+							<td>
+								<button class = "btn btn-danger" [routerLink] = "" (click) = "delete(status.id)">
+									Delete
+								</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<button
+							class = "btn btn-secondary pull-right" (click) = "open(content)">Add new entry
+					</button>
+				</ng-template>
+				<ng-template #elseBlock>
+					<div class = "text-center font-weight-bolder">
+						There are currently no entries of type {{entryType}} for project {{projectName}} <br>
+						<button
+								class = "btn btn-secondary pull-right" (click) = "open(content)">Add new entry
+						</button>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 <ng-template #content let-modal>
-  <div class = "modal-header">
-    <h4 class = "modal-title" id = "modal-basic-title">Create new entry</h4>
-    <button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
-      <span aria-hidden = "true">&times;</span>
-    </button>
-  </div>
-  <form [formGroup] = "newEntryForm" (ngSubmit)="onSubmit()">
-    <div class = "modal-body">
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "modal-basic-title">Create new entry</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "newEntryForm" (ngSubmit) = "onSubmit()">
+		<div class = "modal-body">
 
-      <div class = "form-group">
-        <label for = "defaultNewEntryFormValue">
-          <input type = "text" formControlName = "value" id = "defaultNewEntryFormValue"
-                 class = "form-control"
-                 placeholder = "Value" autocomplete = "off" />
-        </label>
-        <div *ngIf = "newEntryForm.controls['value'].invalid && newEntryForm.controls['value'].touched"
-             class = "alert alert-danger">
-          <entry-settings-message [control] = "newEntryForm.get('value')"></entry-settings-message>
-        </div>
-      </div>
+			<div class = "form-group">
+				<label for = "defaultNewEntryFormValue">
+					<input type = "text" formControlName = "value" id = "defaultNewEntryFormValue"
+					       class = "form-control"
+					       placeholder = "Value" autocomplete = "off" />
+				</label>
+				<div *ngIf = "newEntryForm.controls['value'].invalid && newEntryForm.controls['value'].touched"
+				     class = "alert alert-danger">
+					<entry-settings-message [control] = "newEntryForm.get('value')"></entry-settings-message>
+				</div>
+			</div>
 
-      <div class = "form-group">
-        <label for = "defaultNewEntryFormTextColor">Text Color</label>
-        <input [value]="textColor"
-               [style.background]="textColor"
-               [(colorPicker)]="textColor" formControlName = "textColor"  id = "defaultNewEntryFormTextColor"  class = "form-control"/>
-      </div>
+			<div class = "form-group">
+				<label for = "defaultNewEntryFormTextColor">Text Color</label>
+				<input [value] = "textColor"
+				       [style.background] = "textColor"
+				       [(colorPicker)] = "textColor" formControlName = "textColor" id = "defaultNewEntryFormTextColor"
+				       class = "form-control" />
+			</div>
 
-      <div class = "form-group">
-        <label for = "defaultNewEntryFormBackgroundColor">Background Color</label>
-        <input [value]="backgroundColor"
-               [style.background]="backgroundColor"
-               [(colorPicker)]="backgroundColor"
-               formControlName = "backgroundColor"  id = "defaultNewEntryFormBackgroundColor"  class = "form-control"/>
+			<div class = "form-group">
+				<label for = "defaultNewEntryFormBackgroundColor">Background Color</label>
+				<input [value] = "backgroundColor"
+				       [style.background] = "backgroundColor"
+				       [(colorPicker)] = "backgroundColor"
+				       formControlName = "backgroundColor" id = "defaultNewEntryFormBackgroundColor"
+				       class = "form-control" />
 
-      </div>
+			</div>
 
-      <div class = "form-group">
-        <label for="defaultNewEntryFormEntryType">Entry type</label>
-        <input class="form-control" formControlName = "entryType" id="defaultNewEntryFormEntryType"
-               class = "form-control"
-               autocomplete = "off" readonly="true" value="{{entryType}}"/>
-      </div>
+			<div class = "form-group">
+				<label for = "defaultNewEntryFormEntryType">Entry type</label>
+				<input class = "form-control" formControlName = "entryType" id = "defaultNewEntryFormEntryType"
+				       class = "form-control"
+				       autocomplete = "off" readonly = "true" value = "{{entryType}}" />
+			</div>
 
-      <div class="card col-sm-5 text-center mx-auto" [style.background-color]="backgroundColor" >
-        <div class="card-body" id="previewNewEntry" [style.color]="textColor">
-          Preview.
-        </div>
-      </div>
+			<div class = "card col-sm-5 text-center mx-auto" [style.background-color] = "backgroundColor">
+				<div class = "card-body" id = "previewNewEntry" [style.color] = "textColor">
+					Preview.
+				</div>
+			</div>
 
 
-    </div>
-    <div class = "modal-footer">
-      <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!newEntryForm.valid">Create!</button>
-    </div>
-  </form>
+		</div>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!newEntryForm.valid">Create!</button>
+		</div>
+	</form>
 </ng-template>
 <ng-template #edit let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="upateEntry">Update Entry</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <form [formGroup] = "updateEntryForm" (ngSubmit)="onUpdateSubmit(entryToUpdate.id)">
-  <div class = "modal-body">
+	<div class = "modal-header">
+		<h4 class = "modal-title" id = "upateEntry">Update Entry</h4>
+		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss('Cross click')">
+			<span aria-hidden = "true">&times;</span>
+		</button>
+	</div>
+	<form [formGroup] = "updateEntryForm" (ngSubmit) = "onUpdateSubmit(entryToUpdate.id)">
+		<div class = "modal-body">
 
-    <div class = "form-group">
-      <label for = "defaultEditEntryFormValue">
-        <input type = "text" formControlName = "value" id = "defaultEditEntryFormValue"
-               class = "form-control"
-               placeholder = "Value" autocomplete = "off" />
-      </label>
-      <div *ngIf = "updateEntryForm.controls['value'].invalid && updateEntryForm.controls['value'].touched"
-           class = "alert alert-danger">
-        <entry-settings-message [control] = "updateEntryForm.get('value')"></entry-settings-message>
-      </div>
-    </div>
+			<div class = "form-group">
+				<label for = "defaultEditEntryFormValue">
+					<input type = "text" formControlName = "value" id = "defaultEditEntryFormValue"
+					       class = "form-control"
+					       placeholder = "Value" autocomplete = "off" />
+				</label>
+				<div *ngIf = "updateEntryForm.controls['value'].invalid && updateEntryForm.controls['value'].touched"
+				     class = "alert alert-danger">
+					<entry-settings-message [control] = "updateEntryForm.get('value')"></entry-settings-message>
+				</div>
+			</div>
 
-    <div class = "form-group">
-      <label for = "defaultEditEntryFormTextColor">Text Color</label>
-        <input [value]="textColor"
-               [style.background]="textColor"
-               [(colorPicker)]="textColor" formControlName = "textColor"  id = "defaultEditEntryFormTextColor"  class = "form-control"/>
+			<div class = "form-group">
+				<label for = "defaultEditEntryFormTextColor">Text Color</label>
+				<input [value] = "textColor"
+				       [style.background] = "textColor"
+				       [(colorPicker)] = "textColor" formControlName = "textColor" id = "defaultEditEntryFormTextColor"
+				       class = "form-control" />
 
-    </div>
+			</div>
 
-    <div class = "form-group">
-      <label for = "defaultEditEntryFormBackgroundColor">Background Color</label>
-        <input [value]="backgroundColor"
-               [style.background]="backgroundColor"
-               [(colorPicker)]="backgroundColor" formControlName = "backgroundColor"  id = "defaultEditEntryFormBackgroundColor"  class = "form-control"/>
-    </div>
+			<div class = "form-group">
+				<label for = "defaultEditEntryFormBackgroundColor">Background Color</label>
+				<input [value] = "backgroundColor"
+				       [style.background] = "backgroundColor"
+				       [(colorPicker)] = "backgroundColor" formControlName = "backgroundColor"
+				       id = "defaultEditEntryFormBackgroundColor" class = "form-control" />
+			</div>
 
-    <div class = "form-group">
-      <label for="defaultEditEntryFormEntryType">Entry type</label>
-      <input class="form-control" formControlName = "entryType" id="defaultEditEntryFormEntryType"
-             class = "form-control"
-             autocomplete = "off" readonly="true" value="{{entryType}}"/>
-    </div>
+			<div class = "form-group">
+				<label for = "defaultEditEntryFormEntryType">Entry type</label>
+				<input class = "form-control" formControlName = "entryType" id = "defaultEditEntryFormEntryType"
+				       class = "form-control"
+				       autocomplete = "off" readonly = "true" value = "{{entryType}}" />
+			</div>
 
-    <div class="card col-sm-5 text-center mx-auto" [style.background-color]="backgroundColor" >
-      <div class="card-body" id="previewUpdateEntry" [style.color]="textColor">
-        Preview.
-      </div>
-    </div>
+			<div class = "card col-sm-5 text-center mx-auto" [style.background-color] = "backgroundColor">
+				<div class = "card-body" id = "previewUpdateEntry" [style.color] = "textColor">
+					Preview.
+				</div>
+			</div>
 
-  </div>
+		</div>
 
-  <div class = "modal-footer">
-    <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!updateEntryForm.valid">Update!</button>
-  </div>
-  </form>
+		<div class = "modal-footer">
+			<button type = "submit" class = "btn btn-outline-dark" [disabled] = "!updateEntryForm.valid">Update!
+			</button>
+		</div>
+	</form>
 </ng-template>
 
 </html>

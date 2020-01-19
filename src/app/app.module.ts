@@ -42,7 +42,7 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatNativeDateModule,
+    MatNativeDateModule, MatSelectModule,
     MatSlideToggleModule, MatTooltipModule
 } from '@angular/material';
 import { SprintsListComponent } from './components/sprints-list/sprints-list.component';
@@ -56,6 +56,7 @@ import { EntriesService } from './services/entries.service';
 import { EntrySettingsMessagesComponent } from './shared/messages/entry-settings-messages/entry-settings-messages.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { NewTaskMessagesComponent } from './shared/messages/new-task-messages/new-task-messages.component';
 
 export let InjectorInstance: Injector;
 
@@ -113,6 +114,7 @@ const appRoutes: Routes = [
         EntrySettingsMessagesComponent,
         ProjectDashboardComponent,
         TaskDetailsComponent,
+        NewTaskMessagesComponent,
     ],
     imports: [
         BrowserModule,
@@ -130,7 +132,8 @@ const appRoutes: Routes = [
         MatIconModule,
         MatInputModule,
         ColorPickerModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSelectModule
     ],
     providers: [
         RegistrationValidatorService,
