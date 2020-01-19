@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LoginValidatorService } from '../../validators/login/login-validator.service';
 import { FormControl } from '@angular/forms';
+import { NewTaskValidatorService } from '../../validators/newTask/new-task-validator.service';
 
 @Component({
-    selector: 'entry-settings-message',
+    selector: 'new-task-message',
     template: `<div *ngIf = "this.errorMessage !== null">{{errorMessage}}</div>`
 })
-export class EntrySettingsMessagesComponent implements OnInit {
+export class NewTaskMessagesComponent implements OnInit {
 
     @Input() control: FormControl;
 
@@ -15,7 +15,7 @@ export class EntrySettingsMessagesComponent implements OnInit {
     get errorMessage() {
         for ( const propertyName in this.control.errors ) {
             if ( this.control.errors.hasOwnProperty(propertyName) && this.control.touched ) {
-                return LoginValidatorService.getValidatorErrorMessage(propertyName);
+                return NewTaskValidatorService.getValidatorErrorMessage(propertyName);
             }
         }
         return null;

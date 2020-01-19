@@ -3,9 +3,8 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Swal } from '../../shared/utilities/swal';
-import swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -28,6 +27,26 @@ export class HeaderMainComponent implements OnInit {
 
     taskListSize = 0;
 
+    projectList: any;
+
+    projectListLength: any;
+
+    projectName: any;
+
+    projectSelect: any;
+
+    projectTypes: any;
+
+    projectPriorities: any;
+
+    projectStatuses: any;
+
+    projectSprints: any;
+
+    createTaskForm: any;
+
+    projectNameTaskCreate;
+
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -44,6 +63,23 @@ export class HeaderMainComponent implements OnInit {
 
         this.searchForm = this.formBuilder.group({
             search: [ '' ]
+        });
+
+        this.http.get(environment.baseUrl + '/secure/projects')
+            .subscribe((data) => {
+                this.projectList = data;
+                this.projectListLength = Object.keys(data).length;
+            });
+        this.projectSelect = new FormControl('', [ Validators.required ]);
+
+        this.createTaskForm = this.formBuilder.group({
+            name: [ '', [ Validators.required ] ],
+            description: [ '', [] ],
+            status: [ '', [ Validators.required ] ],
+            priority: [ '', [ Validators.required ] ],
+            type: [ '', [ Validators.required ] ],
+            fixVersion: [ '', [ Validators.required ] ],
+            sprint: [ '', [ Validators.required ] ],
         });
     }
 
@@ -92,4 +128,26 @@ export class HeaderMainComponent implements OnInit {
             location.reload();
         });
     }
+
+    nextStep() {
+        this.projectNameTaskCreate = this.projectSelect.value;
+        this.http.get<any>(environment.baseUrl + '/secure/tasks/create/' + this.projectNameTaskCreate)
+            .subscribe((data) => {
+                this.projectTypes = data.types;
+                this.projectPriorities = data.priorities;
+                this.projectStatuses = data.statuses;
+                this.projectSprints = data.sprints;
+            });
+        this.modalReference = this.modalService.dismissAll();
+        // this.router.navigate(['secure/task/create/' + this.projectSelect.value]).then(page => location.reload());
+    }
+
+    createTask() {
+        this.http.post<any>(environment.baseUrl + '/secure/tasks/create/' + this.projectNameTaskCreate, this.createTaskForm.value)
+            .subscribe(result => {
+                this.router.navigate([ '/secure/tasks/' + result.object.key ])
+                    .then(modal => this.modalReference = this.modalService.dismissAll()).then(page => location.reload());
+            });
+    }
+
 }
