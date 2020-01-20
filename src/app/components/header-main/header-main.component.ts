@@ -129,17 +129,21 @@ export class HeaderMainComponent implements OnInit {
         });
     }
 
-    nextStep() {
+    nextStep(content) {
         this.projectNameTaskCreate = this.projectSelect.value;
+
         this.http.get<any>(environment.baseUrl + '/secure/tasks/create/' + this.projectNameTaskCreate)
             .subscribe((data) => {
                 this.projectTypes = data.types;
                 this.projectPriorities = data.priorities;
                 this.projectStatuses = data.statuses;
                 this.projectSprints = data.sprints;
+                this.modalReference = this.modalService.dismissAll();
+                this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+            }, error => {
+                Swal.swalErrorMessage(error.message);
             });
         this.modalReference = this.modalService.dismissAll();
-        // this.router.navigate(['secure/task/create/' + this.projectSelect.value]).then(page => location.reload());
     }
 
     createTask() {
@@ -147,6 +151,8 @@ export class HeaderMainComponent implements OnInit {
             .subscribe(result => {
                 this.router.navigate([ '/secure/tasks/' + result.object.key ])
                     .then(modal => this.modalReference = this.modalService.dismissAll()).then(page => location.reload());
+            }, error => {
+                // Swal.swalErrorMessage()
             });
     }
 

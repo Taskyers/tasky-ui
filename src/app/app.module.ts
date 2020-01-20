@@ -57,6 +57,7 @@ import { EntrySettingsMessagesComponent } from './shared/messages/entry-settings
 import { ColorPickerModule } from 'ngx-color-picker';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { NewTaskMessagesComponent } from './shared/messages/new-task-messages/new-task-messages.component';
+import { SprintBoardComponent } from './components/sprint-board/sprint-board.component';
 
 export let InjectorInstance: Injector;
 
@@ -79,6 +80,7 @@ const appRoutes: Routes = [
     { path: 'secure/:project/dashboard', component: ProjectDashboardComponent },
     { path: 'secure/:project/entries/:type', component: EntrySettingsComponent },
     { path: 'secure/tasks/:key', component: TaskDetailsComponent },
+    { path: 'secure/sprintBoard/:project', component: SprintBoardComponent }
 
 ];
 
@@ -115,6 +117,7 @@ const appRoutes: Routes = [
         ProjectDashboardComponent,
         TaskDetailsComponent,
         NewTaskMessagesComponent,
+        SprintBoardComponent,
     ],
     imports: [
         BrowserModule,

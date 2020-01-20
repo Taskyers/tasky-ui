@@ -1,0 +1,57 @@
+<app-header-main></app-header-main>
+<body>
+<div class = "container mt-5">
+	<th [colSpan] = "statuses.length">
+		<div class = "text-center"><h3>Statuses of <span
+				class = "font-weight-bolder"><u>{{sprintName}}</u></span> sprint</h3></div>
+	</th>
+
+	<div class = "row">
+		<div class = "col-sm" *ngFor = "let status of statuses">
+			<table class = "m-auto table table-striped table-break-word flex">
+				<thead>
+				<tr>
+					<th>{{status.status}}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td *ngFor = "let task of status.tasks">
+						<div><span class = "font-weight-bolder">Task Key: </span> <a
+								[routerLink] = "['/secure/tasks/' + task.key]">{{task.key}}</a></div>
+						<div><span class = "font-weight-bolder">Task Name:</span> {{task.name}}</div>
+						<div><span class = "font-weight-bolder">Assigned to: </span>
+							<ng-template [ngIf] = "task.assignee == 0" [ngIfElse] = "elseBlock">
+								Unassigned
+							</ng-template>
+							<ng-template #elseBlock>
+								{{task.assignee}}
+							</ng-template>
+						</div>
+						<div class = "row">
+							<div class = "col-lg-2">
+								<span class = "font-weight-bolder">Type: </span>
+							</div>
+							<div class = "col-lg-2">
+								<label class = "btn btn-sm"
+								       [ngStyle] = "{'background-color': task.type.backgroundColor, 'color': task.type.textColor}">{{task.type.value}}</label>
+							</div>
+						</div>
+
+						<div class = "row">
+							<div class = "col-lg-2">
+								<span class = "font-weight-bolder">Priority: </span>
+							</div>
+							<div class = "col-lg-2">
+								<label class = "btn btn-sm"
+								       [ngStyle] = "{'background-color': task.priority.backgroundColor, 'color': task.priority.textColor}">{{task.priority.value}}</label>
+							</div>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</body>

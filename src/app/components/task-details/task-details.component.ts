@@ -44,6 +44,10 @@ export class TaskDetailsComponent implements OnInit {
 
     content: any;
 
+    updateTaskForm: any;
+
+    projectSprints: any;
+
     constructor(private http: HttpClient,
                 private formBuilder: FormBuilder,
                 private modalService: NgbModal,
@@ -51,12 +55,27 @@ export class TaskDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.projectKey = this.route.snapshot.paramMap.get('key');
+
+        this.updateTaskForm = this.formBuilder.group({
+            name: [ '', [ Validators.required ] ],
+            description: [ '', [] ],
+            fixVersion: [ '', [ Validators.required ] ],
+            sprint: [ '', [ Validators.required ] ]
+        });
+
         this.http.get<any>(environment.baseUrl + '/secure/tasks/' + this.projectKey)
             .subscribe((data) => {
+                console.log(data);
                 this.taskDetails = data;
                 this.taskName = data.name;
                 this.taskKey = data.key;
                 this.comments = data.comments;
+
+                this.updateTaskForm.controls.name.setValue(data.name);
+                this.updateTaskForm.controls.description.setValue(data.description);
+                this.updateTaskForm.controls.fixVersion.setValue(data.fixVersion);
+                this.updateTaskForm.controls.sprint.setValue(data.sprint.name);
+
             });
         this.http.get<any>(environment.baseUrl + '/secure/tasks/' + this.projectKey + '/statuses')
             .subscribe((data) => {
@@ -83,6 +102,11 @@ export class TaskDetailsComponent implements OnInit {
             id: [ '' ],
             content: [ '', [ Validators.required ] ]
         });
+
+        this.http.get<any>(environment.baseUrl + '/secure/tasks/' + this.projectKey + '/sprints')
+            .subscribe((data) => {
+                this.projectSprints = data;
+            });
     }
 
     async delete(commentId: string) {
@@ -144,5 +168,101 @@ export class TaskDetailsComponent implements OnInit {
             showConfirmButton: true
         });
 
+    }
+
+    typeUpdate(value: string) {
+        const body = new FormData();
+        body.append('value', value);
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/type/' + this.taskDetails.id, body)
+            .subscribe(
+                (result) => {
+                    location.reload();
+                },
+                error => {
+                }
+            );
+    }
+
+    priorityUpdate(value: string) {
+        const body = new FormData();
+        body.append('value', value);
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/priority/' + this.taskDetails.id, body)
+            .subscribe(
+                (result) => {
+                    location.reload();
+                },
+                error => {
+                }
+            );
+    }
+
+    statusUpdate(value: string) {
+        const body = new FormData();
+        body.append('value', value);
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/status/' + this.taskDetails.id, body)
+            .subscribe(
+                (result) => {
+                    location.reload();
+                },
+                error => {
+                }
+            );
+    }
+
+    resolutionUpdate(value: string) {
+        const body = new FormData();
+        body.append('value', value);
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/resolution/' + this.taskDetails.id, body)
+            .subscribe(
+                (result) => {
+                    location.reload();
+                },
+                error => {
+                }
+            );
+    }
+
+    assignToMe() {
+        const body = new FormData();
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/assignToMe/' + this.taskDetails.id, body)
+            .subscribe(
+                (result) => {
+                    location.reload();
+                },
+                error => {
+                }
+            );
+    }
+
+    watchTask() {
+        const body = new FormData();
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/watch/' + this.taskDetails.id, body)
+            .subscribe(
+                (result) => {
+                    location.reload();
+                },
+                error => {
+                    Swal.swalErrorMessage(error.error.message);
+                }
+            );
+    }
+
+    updateTask() {
+        this.http.put<any>(environment.baseUrl + '/secure/tasks/edit/' + this.taskDetails.id, this.updateTaskForm.value).subscribe(
+            result => {
+                location.reload();
+            }, error => {
+            }
+        );
+    }
+
+    stopWatching() {
+        const body = new FormData();
+        this.http.patch<any>(environment.baseUrl + '/secure/tasks/edit/stopWatching/' + this.taskDetails.id, body).subscribe(
+            result => {
+                location.reload();
+            }, error => {
+            }
+        );
     }
 }
