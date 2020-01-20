@@ -127,12 +127,12 @@
 	</div>
 	<div class = "modal-footer">
 		<button class = "btn btn-outline-dark" [disabled] = "projectSelect.value.length <= 0"
-		        (click) = "nextStep(); open(createNext)">Next step
+		        (click) = "nextStep(createNext);">Next step
 		</button>
 	</div>
 </ng-template>
 
-<ng-template #createNext let-modal>
+<ng-template #createNext let-modal id="createTaskModal">
 	<div class = "modal-header">
 		<h4 class = "modal-title" id = "createTask">Create new task</h4>
 		<button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss()">
