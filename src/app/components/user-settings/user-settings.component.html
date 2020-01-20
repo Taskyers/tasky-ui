@@ -1,0 +1,169 @@
+<html>
+<app-header-main></app-header-main>
+<body>
+<section id="cover" >
+  <div id="cover-caption">
+    <div class="container">
+      <div class="row text-white">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+          <h1 class="display-4 py-2 text-truncate">Account Settings</h1>
+          <div class="px-2">
+            <div id="block" class="justify-content-center">
+              <div class="row" id="contentRow">
+                <div class="col-6 text-center">
+                <div class="card">
+                  <div class="card-header bg-primary">
+                    Personals
+                  </div>
+                <div class="col-sm details"  id="userPersonals">
+                  <div><span class="values">Name:</span>
+                    <span>
+                      {{userDetails.name}}
+                    </span>
+                  </div>
+                  <div><span class="values">Surname:</span>
+                    <span>
+                      {{userDetails.surname}}
+                    </span>
+                  </div>
+                </div>
+
+                </div>
+                <div class="card">
+                  <div class="card-header bg-primary">
+                    User Email
+                  </div>
+                <div class="col-sm details"  id="userEmail">
+                  <div><span class="values">Email:</span>
+                    <span>
+                      {{userDetails.email}}
+                    </span>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col text-center" >
+              <button class="btn btn-primary btn-md m-1"  [routerLink] = "" (click) = "update(edit)">Update Personals</button>
+                <button class="btn btn-primary btn-md m-1" [routerLink] = "" (click) = "updateUserPassword(editPassword)">Update Password</button>
+                <button class="btn btn-primary btn-md m-1" [routerLink] = "" (click) = "updateUserEmail(editEmail)">Update Email</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+<ng-template #edit let-modal>
+  <div class = "modal-header">
+    <h4 class = "modal-title" id = "updatePersonals">Update Personals</h4>
+    <button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss('Cross click')">
+      <span aria-hidden = "true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup] = "updatePersonalsForm" (ngSubmit) = "updatePersonals()">
+    <div class = "modal-body">
+
+      <div class = "form-group">
+        <label for = "newName">Name</label>
+        <input type="text" formControlName = "name" id = "newName"
+               class = "form-control" />
+        <div *ngIf = "updatePersonalsForm.controls['name'].invalid && updatePersonalsForm.controls['name'].touched"
+             class = "alert alert-danger">
+          <registration-message [control] = "updatePersonalsForm.get('name')"></registration-message>
+        </div>
+      </div>
+
+      <div class = "form-group">
+        <label for = "newSurname">Surname</label>
+        <input type="text" formControlName = "surname"
+               id = "newSurname" class = "form-control" />
+        <div *ngIf = "updatePersonalsForm.controls['surname'].invalid && updatePersonalsForm.controls['surname'].touched"
+             class = "alert alert-danger">
+          <registration-message [control] = "updatePersonalsForm.get('surname')"></registration-message>
+        </div>
+      </div>
+
+    </div>
+
+    <div class = "modal-footer">
+      <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!updatePersonalsForm.valid">Update!
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #editEmail let-modal>
+  <div class = "modal-header">
+    <h4 class = "modal-title" id = "updateEmail">Update Email</h4>
+    <button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss('Cross click')">
+      <span aria-hidden = "true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup] = "emailForm" (ngSubmit) = "updateEmail()">
+    <div class = "modal-body">
+
+      <div class = "form-group">
+        <label for = "newEmail">Email</label>
+        <input type="text" formControlName = "email" id = "newEmail"
+               class = "form-control" />
+        <div *ngIf = "emailForm.controls['email'].invalid && (emailForm.controls['email'].touched)
+            && !emailForm.get('email').errors.emailInUse"
+             class = "alert alert-danger">
+          <registration-message [control] = "emailForm.get('email')"></registration-message>
+        </div>
+        <div *ngIf="emailForm.get('email').status === 'VALID'" class = "alert alert-success">
+          Email is available!
+        </div>
+        <div *ngIf="emailForm.get('email').errors && emailForm.get('email').errors.emailInUse" class = "alert alert-danger">
+          Email is already taken.
+        </div>
+      </div>
+    </div>
+
+    <div class = "modal-footer">
+      <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!emailForm.valid">Update!
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #editPassword let-modal>
+  <div class = "modal-header">
+    <h4 class = "modal-title" id = "updatePassword">Update Email</h4>
+    <button type = "button" class = "close" aria-label = "Close" (click) = "modal.dismiss('Cross click')">
+      <span aria-hidden = "true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup] = "passwordForm" (ngSubmit) = "updatePassword()">
+    <div class = "modal-body">
+
+      <div class = "form-group">
+        <label for = "currentPassword">Current Password</label>
+        <input type="password" formControlName = "currentPassword" id = "currentPassword"
+               class = "form-control"  placeholder="Current Password"/>
+      </div>
+
+      <div class = "form-group">
+        <label for = "newPassword">New Password</label>
+        <input type="password" formControlName = "newPassword" id = "newPassword"
+               class = "form-control" placeholder="New Password"/>
+        <div *ngIf = "passwordForm.controls['newPassword'].invalid && passwordForm.controls['newPassword'].touched"
+             class = "alert alert-danger">
+          <registration-message [control] = "passwordForm.get('newPassword')"></registration-message>
+        </div>
+      </div>
+    </div>
+
+    <div class = "modal-footer">
+      <button type = "submit" class = "btn btn-outline-dark" [disabled] = "!passwordForm.valid">Update!
+      </button>
+    </div>
+  </form>
+</ng-template>
+</html>
+
