@@ -32,7 +32,6 @@ export class ProjectDashboardComponent implements OnInit {
 
     dataTasksLenght: any;
 
-
     constructor(private http: HttpClient,
                 private route: ActivatedRoute,
                 private modalService: NgbModal,
@@ -97,5 +96,20 @@ export class ProjectDashboardComponent implements OnInit {
 
     setValue(username: any) {
         this.projectInvitationForm.get('username').setValue(username);
+    }
+
+    showBoard() {
+        this.http.get<any>(environment.baseUrl + '/secure/board/' + this.projectName)
+            .subscribe((data) => {
+                if ( data.message == null ) {
+                    console.log('x')
+                    this.router.navigate([ '/secure/sprintBoard/' + this.projectName ]);
+
+                } else {
+
+                    Swal.swalErrorMessage(data.message);
+
+                }
+            });
     }
 }

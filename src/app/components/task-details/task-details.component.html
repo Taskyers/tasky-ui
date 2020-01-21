@@ -24,7 +24,7 @@
 								<span class = "values">Type: </span>
 							</div>
 						</div>
-						<div class = "col-lg-7 mt-1">
+						<div class = "col-lg-5 mt-1">
 							<button type = "button" class = "btn btn-sm details"
 							        [style.backgroundColor] = taskDetails.type.backgroundColor
 							        [style.color] = taskDetails.type.textColor title = "Type"
@@ -32,7 +32,7 @@
 								{{taskDetails.type.value}}
 							</button>
 						</div>
-						<div class = "col-lg-3 details">
+						<div class = "col-lg-5 details">
 							<div><span class = "values">Fix Version:</span> {{taskDetails.fixVersion}}</div>
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 								<span class = "values">Priority: </span>
 							</div>
 						</div>
-						<div class = "col-lg-7 mt-1">
+						<div class = "col-lg-5 mt-1">
 							<button type = "button" class = "btn btn-sm"
 							        [style.backgroundColor] = taskDetails.priority.backgroundColor
 							        [style.color] = taskDetails.priority.textColor title = "Priority"
@@ -51,8 +51,10 @@
 								{{taskDetails.priority.value}}
 							</button>
 						</div>
-						<div class = "col-lg-3 details">
-							<div><span class = "values">Sprint: </span><a [routerLink]="['/secure/sprintBoard/project']">{{taskDetails.sprint.name}}</a></div>
+						<div class = "col-lg-5 details">
+							<div><span class = "values">Sprint: </span><a
+									[routerLink] = "['/secure/sprintBoard/project']">{{taskDetails.sprint.name}}</a>
+							</div>
 						</div>
 					</div>
 
@@ -62,7 +64,7 @@
 								<span class = "values">Status: </span>
 							</div>
 						</div>
-						<div class = "col-lg-7 mt-1">
+						<div class = "col-lg-5 mt-1">
 							<button type = "button" class = "btn btn-sm"
 							        [style.backgroundColor] = taskDetails.status.backgroundColor
 							        [style.color] = taskDetails.status.textColor title = "Priority"
@@ -70,7 +72,7 @@
 								{{taskDetails.status.value}}
 							</button>
 						</div>
-						<div class = "col-md-3 details">
+						<div class = "col-md-5 details">
 							<div><span class = "values">Resolution: </span>
 								<button type = "button" class = "btn btn-sm" title = "Resolution"
 								        style = "background-color: #888888; color: #282726"
@@ -193,18 +195,19 @@
 </body>
 <ng-template #popPriorities>
 	<div class = "row">
-		<div *ngFor = "let priority of priorities" (click) = "priorityUpdate(priority)">
-			<button type = "button" class = "btn btn-sm popContent"
-			        [style.backgroundColor] = taskDetails.priority.backgroundColor
-			        [style.color] = taskDetails.priority.textColor title = "Priority" [ngbPopover] = "popPriorities">
-				{{priority}}
-			</button>
-		</div>
+			<div  class = "m-2" *ngFor = "let priority of priorities" (click) = "priorityUpdate(priority)">
+				<button type = "button" class = "btn btn-sm popContent"
+				        [style.backgroundColor] = taskDetails.priority.backgroundColor
+				        [style.color] = taskDetails.priority.textColor title = "Priority"
+				        [ngbPopover] = "popPriorities">
+					{{priority}}
+				</button>
+			</div>
 	</div>
 </ng-template>
 <ng-template #popStatuses>
 	<div class = "row">
-		<div *ngFor = "let status of statuses" (click) = "statusUpdate(status)">
+		<div  class = "m-2" *ngFor = "let status of statuses" (click) = "statusUpdate(status)">
 			<button type = "button" class = "btn btn-sm popContent"
 			        [style.backgroundColor] = taskDetails.status.backgroundColor
 			        [style.color] = taskDetails.status.textColor title = "Status" [ngbPopover] = "popStatuses">
@@ -215,7 +218,7 @@
 </ng-template>
 <ng-template #popTypes>
 	<div class = "row">
-		<div *ngFor = "let type of types" (click) = "typeUpdate(type)">
+		<div  class = "m-2" *ngFor = "let type of types" (click) = "typeUpdate(type)">
 			<button class = "btn btn-sm popContent"
 			        [style.backgroundColor] = taskDetails.type.backgroundColor
 			        [style.color] = taskDetails.type.textColor title = "Type">
@@ -226,7 +229,7 @@
 </ng-template>
 <ng-template #popResolutions>
 	<div class = "row">
-		<div *ngFor = "let resolution of resolutions" (click) = "resolutionUpdate(resolution)">
+		<div  class = "m-2" *ngFor = "let resolution of resolutions" (click) = "resolutionUpdate(resolution)">
 			<button type = "button" class = "btn btn-sm popContent resolution"
 			        title = "Resolution" [ngbPopover] = "popResolutions">
 				{{resolution}}
@@ -326,7 +329,8 @@
 				<mat-form-field>
 					<mat-label>Sprint</mat-label>
 					<mat-select formControlName = "sprint">
-						<mat-option *ngFor = "let sprint of projectSprints" [value] = "sprint.name">{{sprint.name}}</mat-option>
+						<mat-option *ngFor = "let sprint of projectSprints"
+						            [value] = "sprint.name">{{sprint.name}}</mat-option>
 					</mat-select>
 				</mat-form-field>
 			</div>
