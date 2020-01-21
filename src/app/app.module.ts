@@ -58,6 +58,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { NewTaskMessagesComponent } from './shared/messages/new-task-messages/new-task-messages.component';
 import { SprintBoardComponent } from './components/sprint-board/sprint-board.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UpdateEmailComponent } from './components/update-email/update-email.component';
 
 export let InjectorInstance: Injector;
 
@@ -80,7 +82,14 @@ const appRoutes: Routes = [
     { path: 'secure/:project/dashboard', component: ProjectDashboardComponent },
     { path: 'secure/:project/entries/:type', component: EntrySettingsComponent },
     { path: 'secure/tasks/:key', component: TaskDetailsComponent },
-    { path: 'secure/sprintBoard/:project', component: SprintBoardComponent }
+    { path: 'secure/sprintBoard/:project', component: SprintBoardComponent },
+    { path: 'secure/settings/user', component: UserSettingsComponent },
+    { path: 'viewAllProjects/:project', component: ProjectSettingsComponent },
+    { path: 'mainDashboard/:project', component: ProjectSettingsComponent },
+    { path: 'secure/projectUserList/:project', component: ProjectUserListComponent },
+    { path: 'secure/projectUserList/update/:userId/:project', component: UpdateUserComponent },
+    { path: 'secure/projects/settings/entries', component: EntrySettingsComponent },
+    { path: 'secure/settings/user/email/:token', component: UpdateEmailComponent },
 
 ];
 
@@ -118,6 +127,9 @@ const appRoutes: Routes = [
         TaskDetailsComponent,
         NewTaskMessagesComponent,
         SprintBoardComponent,
+        UserSettingsComponent,
+        EntrySettingsComponent,
+        UpdateEmailComponent,
     ],
     imports: [
         BrowserModule,

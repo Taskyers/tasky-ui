@@ -1,0 +1,43 @@
+#cover {
+  background-size: cover;
+  height: 80%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#cover-caption {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+#block:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: -1;
+  border-radius: 10px;
+}
+
+#contentRow{
+  justify-content: center;
+  color: #282726;
+}
+
+.card{
+  margin: 10px;
+}
+ .values{
+   font-weight: bold;
+ }
+
+ .card-header{
+   font-size: 20px;
+   font-weight: bolder;
+ }
