@@ -102,13 +102,9 @@ export class ProjectDashboardComponent implements OnInit {
         this.http.get<any>(environment.baseUrl + '/secure/board/' + this.projectName)
             .subscribe((data) => {
                 if ( data.message == null ) {
-                    console.log('x')
                     this.router.navigate([ '/secure/sprintBoard/' + this.projectName ]);
-
                 } else {
-
                     Swal.swalErrorMessage(data.message);
-
                 }
             });
     }
