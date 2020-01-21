@@ -6,6 +6,7 @@
 				class = "font-weight-bolder"><u>{{sprintName}}</u></span> sprint</h3></div>
 	</th>
 
+
 	<div class = "row">
 		<div class = "col-sm" *ngFor = "let status of statuses">
 			<table class = "m-auto table table-striped table-break-word flex">
@@ -29,20 +30,20 @@
 							</ng-template>
 						</div>
 						<div class = "row">
-							<div class = "col-lg-2">
+							<div class = "col">
 								<span class = "font-weight-bolder">Type: </span>
 							</div>
-							<div class = "col-lg-2">
+							<div class = "col">
 								<label class = "btn btn-sm"
 								       [ngStyle] = "{'background-color': task.type.backgroundColor, 'color': task.type.textColor}">{{task.type.value}}</label>
 							</div>
 						</div>
 
 						<div class = "row">
-							<div class = "col-lg-2">
+							<div class = "col">
 								<span class = "font-weight-bolder">Priority: </span>
 							</div>
-							<div class = "col-lg-2">
+							<div class = "col">
 								<label class = "btn btn-sm"
 								       [ngStyle] = "{'background-color': task.priority.backgroundColor, 'color': task.priority.textColor}">{{task.priority.value}}</label>
 							</div>
@@ -52,6 +53,7 @@
 				</tbody>
 			</table>
 		</div>
+
 	</div>
 </div>
 </body>

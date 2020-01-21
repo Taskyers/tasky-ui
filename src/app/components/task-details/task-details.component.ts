@@ -48,6 +48,8 @@ export class TaskDetailsComponent implements OnInit {
 
     projectSprints: any;
 
+    projectName: any;
+
     constructor(private http: HttpClient,
                 private formBuilder: FormBuilder,
                 private modalService: NgbModal,
@@ -70,6 +72,7 @@ export class TaskDetailsComponent implements OnInit {
                 this.taskName = data.name;
                 this.taskKey = data.key;
                 this.comments = data.comments;
+                this.projectName = data.projectName;
 
                 this.updateTaskForm.controls.name.setValue(data.name);
                 this.updateTaskForm.controls.description.setValue(data.description);

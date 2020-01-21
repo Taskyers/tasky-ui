@@ -18,6 +18,8 @@ export class SprintBoardComponent implements OnInit {
 
     statuses: any;
 
+    errorMessage: any;
+
     constructor(private http: HttpClient,
                 private formBuilder: FormBuilder,
                 private modalService: NgbModal,
@@ -30,6 +32,8 @@ export class SprintBoardComponent implements OnInit {
                 console.log(data);
                 this.sprintName = data.sprintName;
                 this.statuses = data.statuses;
+            }, error => {
+                this.errorMessage = error.message;
             });
 
     }
