@@ -53,7 +53,7 @@
 						</div>
 						<div class = "col-lg-5 details">
 							<div><span class = "values">Sprint: </span><a
-									[routerLink] = "['/secure/sprintBoard/project']">{{taskDetails.sprint.name}}</a>
+									[routerLink] = "['/secure/sprintBoard/' + projectName]">{{taskDetails.sprint.name}}</a>
 							</div>
 						</div>
 					</div>
@@ -109,7 +109,7 @@
 											<div>
 												<div class = "mic-info">
 													By: <span
-														style = "color: #282726; font-weight: bold">{{comment.author}}</span>
+														style = "color: #282726; text-decoration: underline;">{{comment.author}}</span>
 													on {{comment.creationDate}}
 													<ng-template [ngIf] = "comment.edited"><span
 															style = "font-size: small; color: coral">edited</span>
