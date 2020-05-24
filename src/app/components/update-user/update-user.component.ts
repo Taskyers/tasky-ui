@@ -44,15 +44,15 @@ export class UpdateUserComponent implements OnInit {
             roles: this.roleList
         };
         JSON.stringify(jsonToSend);
+
         this.http.put<any>(environment.baseUrl + '/secure/project/settings/users/' + this.userId + '/' + this.projectName, jsonToSend)
             .subscribe(
-                (result) => {
+                result => {
                     Swal.swalSuccessMessage(result.message);
                 },
                 error => {
                     Swal.swalErrorMessage(error.message);
-                }
-            );
+                });
     }
 
     onChange(tableKey: string, tableDescription: string, value: MatSlideToggleChange) {
